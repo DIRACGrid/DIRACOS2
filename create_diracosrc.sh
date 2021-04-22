@@ -20,7 +20,7 @@
 } > "$PREFIX/diracosrc"
 
 # Workaround for the incorrect etc directory in v7r2
-ln -s "$PREFIX/etc" "$PREFIX/lib/python3.8/site-packages/etc"
+ln -s "$PREFIX/etc" "$PREFIX/lib/python3.9/site-packages/etc"
 
 # Print further install instructions
 echo ""
