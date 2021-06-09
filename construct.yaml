@@ -36,6 +36,7 @@ specs:
   - pyasn1 >0.4.1
   - pyasn1-modules
   - tornado_m2crypto
+  - oidc-agent  # [linux64]
   # Databases
   - cmreshandler >1.0.0b4
   - elasticsearch-dsl
