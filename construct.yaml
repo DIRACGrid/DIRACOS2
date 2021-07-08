@@ -36,7 +36,7 @@ specs:
   - m2crypto >=0.36,<0.38
   - pyasn1 >0.4.1
   - pyasn1-modules
-  - tornado_m2crypto
+  - tornado_m2crypto  # [not osx]
   # Databases
   - cmreshandler >1.0.0b4
   - elasticsearch-dsl
@@ -51,7 +51,7 @@ specs:
   - boto3
   - gfal2-util
   - htcondor-utils  # [linux64]
-  - nordugrid-arc
+  - nordugrid-arc  # [not osx]
   - python-gfal2
   - python-htcondor  # [linux64]
   - voms
@@ -62,7 +62,7 @@ specs:
   - git
   - gitpython >=2.1.0
   - matplotlib-base
-  - myproxy
+  - myproxy  # [not osx]
   - numpy
   - openssh
   - pexpect >=4.0.1
@@ -73,11 +73,11 @@ specs:
   - pytz >=2015.7
   - requests >=2.9.1
   - rrdtool
-  - singularity >=3.7
+  - singularity >=3.7  # [not osx]
   - six
   - subprocess32
   - suds-jurko >=0.6
-  - tornado *+dirac*
+  - tornado *+dirac*  # [not osx]
   - xmltodict
   - importlib_resources
   # Testing and development
