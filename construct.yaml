@@ -39,6 +39,7 @@ specs:
   - tornado_m2crypto
   # Databases
   - cmreshandler >1.0.0b4
+  - elasticsearch <7.14
   - elasticsearch-dsl
   - mysql-client
   # Earlier versions of mysqlclient were build with older MySQL versions
