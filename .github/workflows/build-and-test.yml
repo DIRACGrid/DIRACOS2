@@ -22,7 +22,7 @@ jobs:
         shell: bash -l {0}
     strategy:
       matrix:
-        target_arch: ["linux-64", "linux-aarch64", "linux-ppc64le"]
+        target_arch: ["linux-64", "linux-aarch64", "linux-ppc64le", "osx-arm64", "osx-64"]
     steps:
       - uses: actions/checkout@v2
       - id: get-date
