@@ -20,8 +20,7 @@ PLATFORM_MAPPING = {
     "linux-64": "Linux-x86_64",
     "linux-aarch64": "Linux-aarch64",
     "linux-ppc64le": "Linux-ppc64le",
-    "osx-64": "Darwin-x86_64",
-    "osx-arm64": "Darwin-arm64"
+    "osx-64": "Darwin-x86_64"
 }
 logging.basicConfig(level=logging.INFO)
 
