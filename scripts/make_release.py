@@ -20,6 +20,7 @@ PLATFORM_MAPPING = {
     "linux-64": "Linux-x86_64",
     "linux-aarch64": "Linux-aarch64",
     "linux-ppc64le": "Linux-ppc64le",
+    "osx-64": "Darwin-x86_64"
 }
 logging.basicConfig(level=logging.INFO)
 
@@ -67,7 +68,7 @@ def main(
 
     # Download the artifacts
     installers = {}
-    for platform in ["linux-64", "linux-aarch64", "linux-ppc64le"]:
+    for platform in PLATFORM_MAPPING:
         logging.info(f"Getting installer for {platform}")
         if artifacts_dir:
             assert dry_run
