@@ -61,6 +61,7 @@ moduleNames = [
     'fcntl',
     'filecmp',
     'fnmatch',
+    'fts3',
     'functools',
     '__future__',
     'getopt',
