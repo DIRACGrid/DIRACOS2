@@ -50,7 +50,7 @@ specs:
   - apache-libcloud
   - boto3
   - gfal2-util
-  - fts3
+  - fts3 >=0.0.0.1.dev2
   - htcondor-utils  # [linux64]
   - nordugrid-arc  # [not osx]
   - python-gfal2
