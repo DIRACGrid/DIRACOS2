@@ -141,7 +141,7 @@ jobs:
       matrix:
         dirac-branch:
           - rel-v7r2
-          - integration
+          - rel-v7r3
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
