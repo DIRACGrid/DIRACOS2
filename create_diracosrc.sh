@@ -38,18 +38,12 @@
     echo ''
     echo '# Add sanity check for X509_VOMS_DIR variable'
     echo 'if ! checkDir "$X509_VOMS_DIR" ; then'
-    echo '  export X509_VOMS_DIR="/etc/grid-security/vomsdir"'
-    echo '  if ! checkDir "$X509_VOMS_DIR" ; then'
-    echo "    export X509_VOMS_DIR='${PREFIX}/etc/grid-security/vomsdir'"
-    echo '  fi'
+    echo "  export X509_VOMS_DIR='${PREFIX}/etc/grid-security/vomsdir'"
     echo 'fi'
     echo ''
     echo '# Add sanity check for X509_VOMSES variable'
     echo 'if ! checkDir "$X509_VOMSES" ; then'
-    echo '  export X509_VOMSES="/etc/vomses"'
-    echo '  if ! checkDir "$X509_VOMSES" ; then'
-    echo "    export X509_VOMSES='${PREFIX}/etc/grid-security/vomses'"
-    echo '  fi'
+    echo "  export X509_VOMSES='${PREFIX}/etc/grid-security/vomses'"
     echo 'fi'
     echo ''
 } > "$PREFIX/diracosrc"
