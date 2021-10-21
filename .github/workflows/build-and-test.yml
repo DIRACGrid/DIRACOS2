@@ -164,7 +164,9 @@ jobs:
             "CLIENT_DIRACOS_TARBALL_PATH=${CLIENT_DIRACOS_TARBALL_PATH}" \
             "CLIENT_USE_PYTHON3=Yes"
 
-  integration-tests-client-and-server:
+  # This is duplicated as USE_PYTHON3=Yes is needed for rel-v7r3
+  # As soon as support for rel-v7r3 is dropped this job can be removed
+  integration-tests-client-and-server-v7r3:
     name: Integration tests (Py3 server)
     if: github.repository == 'DIRACGrid/DIRACOS2'
     needs: build-installer
@@ -174,7 +176,6 @@ jobs:
       matrix:
         dirac-branch:
           - rel-v7r3
-          - integration
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
@@ -196,3 +197,34 @@ jobs:
           ./integration_tests.py create \
             "DIRACOS_TARBALL_PATH=${DIRACOS_TARBALL_PATH}" \
             "USE_PYTHON3=Yes"
+
+  integration-tests-client-and-server:
+    name: Integration tests (Py3 server)
+    if: github.repository == 'DIRACGrid/DIRACOS2'
+    needs: build-installer
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        dirac-branch:
+          - integration
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      - name: Download installer
+        uses: actions/download-artifact@v2
+        with:
+          name: installer-linux-64
+      - name: Prepare environment
+        run: |
+          pip install typer pyyaml gitpython packaging
+          git clone https://github.com/DIRACGrid/DIRAC.git -b "${{ matrix.dirac-branch }}" DIRACRepo
+      - name: Run tests
+        run: |
+          DIRACOS_TARBALL_PATH=$(echo ${PWD}/DIRACOS-*.sh)
+          echo "DIRACOS_TARBALL_PATH is ${DIRACOS_TARBALL_PATH}"
+          cd DIRACRepo
+          ./integration_tests.py create \
+            "DIRACOS_TARBALL_PATH=${DIRACOS_TARBALL_PATH}"

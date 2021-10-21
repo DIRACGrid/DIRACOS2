@@ -82,6 +82,7 @@ specs:
   - xmltodict
   - importlib_resources
   # Testing and development
+  - bat
   - docutils
   - hypothesis
   - ipython
