@@ -55,6 +55,7 @@ specs:
   - nordugrid-arc  # [not osx]
   - python-gfal2
   - python-htcondor  # [linux64]
+  - rucio-clients
   - voms
   # Others
   - cachetools
