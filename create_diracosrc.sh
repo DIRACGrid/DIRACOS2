@@ -29,7 +29,7 @@
     echo '}'
     echo ''
     echo '# Add sanity check for X509_CERT_DIR variable'
-    echo 'if ! checkDir "$X509_CERT_DIR" ; then'
+    echo 'if ! checkDir "${X509_CERT_DIR:-}" ; then'
     echo '  export X509_CERT_DIR="/etc/grid-security/certificates"'
     echo '  if ! checkDir "$X509_CERT_DIR" ; then'
     echo "    export X509_CERT_DIR='${PREFIX}/etc/grid-security/certificates'"
@@ -37,12 +37,12 @@
     echo 'fi'
     echo ''
     echo '# Add sanity check for X509_VOMS_DIR variable'
-    echo 'if ! checkDir "$X509_VOMS_DIR" ; then'
+    echo 'if ! checkDir "${X509_VOMS_DIR:-}" ; then'
     echo "  export X509_VOMS_DIR='${PREFIX}/etc/grid-security/vomsdir'"
     echo 'fi'
     echo ''
     echo '# Add sanity check for X509_VOMSES variable'
-    echo 'if ! checkDir "$X509_VOMSES" ; then'
+    echo 'if ! checkDir "${X509_VOMSES:-}" ; then'
     echo "  export X509_VOMSES='${PREFIX}/etc/grid-security/vomses'"
     echo 'fi'
     echo ''
