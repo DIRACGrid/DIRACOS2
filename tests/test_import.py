@@ -218,4 +218,5 @@ def test_gfal_plugins():
     assert "gridftp" in plugins
     assert "http" in plugins
     assert "sftp" in plugins
+    assert "srm" in plugins
     assert "xrootd" in plugins
