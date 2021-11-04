@@ -20,7 +20,7 @@ PLATFORM_MAPPING = {
     "linux-64": "Linux-x86_64",
     "linux-aarch64": "Linux-aarch64",
     "linux-ppc64le": "Linux-ppc64le",
-    "osx-64": "Darwin-x86_64"
+    "osx-64": "Darwin-x86_64",
 }
 logging.basicConfig(level=logging.INFO)
 
@@ -72,20 +72,28 @@ def main(
         logging.info(f"Getting installer for {platform}")
         if artifacts_dir:
             assert dry_run
-            installers[platform] = get_installer_artifacts_local(artifacts_dir, platform)
+            installers[platform] = get_installer_artifacts_local(
+                artifacts_dir, platform
+            )
         else:
             installers[platform] = get_installer_artifacts(run_id, platform)
 
         # Patch the installer to be the requested version
-        header, installer_data = installers[platform]["installer"].split(END_HEADER_MAGIC, 1)
+        header, installer_data = installers[platform]["installer"].split(
+            END_HEADER_MAGIC, 1
+        )
         header = header.decode()
         installer_metadata = dict(re.findall(r"# ([A-Z]+): +(.+)", header))
         logging.info(f"Found installer metadata {installer_metadata}")
         this_version, next_version = get_version(requested_version, installer_metadata)
         if dry_run:
-            logging.info(f"Mock release {this_version} next version will be {next_version}")
+            logging.info(
+                f"Mock release {this_version} next version will be {next_version}"
+            )
         else:
-            logging.info(f"Releasing {this_version} next version will be {next_version}")
+            logging.info(
+                f"Releasing {this_version} next version will be {next_version}"
+            )
         # There should be once instance of the version string in the header and
         # the rest should be "DIRACOS $VER". Check this is the case.
         assert (
@@ -94,7 +102,9 @@ def main(
         )
         # Update the version in the installer to be the requested one
         header = header.replace(installer_metadata["VER"], this_version)
-        installers[platform]["installer"] = header.encode() + END_HEADER_MAGIC + installer_data
+        installers[platform]["installer"] = (
+            header.encode() + END_HEADER_MAGIC + installer_data
+        )
 
     # Load the release notes
     release_notes = make_release_notes(this_version, installers)
@@ -214,8 +224,12 @@ def get_installer_artifacts_local(artifacts_dir, platform):
     """
     result = {}
     if platform == "linux-64":
-        result["environment_yaml"]= (Path(artifacts_dir) / f"environment-yaml-{platform}" / "environment.yaml").read_text()
-    result["installer"] = next((Path(artifacts_dir) / f"installer-{platform}").glob(f"DIRACOS*.sh")).read_bytes()
+        result["environment_yaml"] = (
+            Path(artifacts_dir) / f"environment-yaml-{platform}" / "environment.yaml"
+        ).read_text()
+    result["installer"] = next(
+        (Path(artifacts_dir) / f"installer-{platform}").glob(f"DIRACOS*.sh")
+    ).read_bytes()
     return result
 
 
@@ -240,7 +254,10 @@ def changes_since_last_version(version, environment_yaml, platform):
     for release in r.json():
         for asset in release["assets"]:
             # TODO: This first entry should be removed
-            if asset["name"] in ["DIRACOS-environment.yaml", f"DIRACOS-{alt_platform}-environment.yaml"]:
+            if asset["name"] in [
+                "DIRACOS-environment.yaml",
+                f"DIRACOS-{alt_platform}-environment.yaml",
+            ]:
                 break
         else:
             raise NotImplementedError(
@@ -302,14 +319,17 @@ def make_release_notes(version, installers):
     with tempfile.NamedTemporaryFile(delete=False, mode="wt") as tmp:
         tmp.write(r.text)
 
-    release_notes = subprocess.check_output([
-        "python",
-        tmp.name,
-        "--sinceLatestTag",
-        "-r=DIRACGrid/DIRACOS2",
-        "--branches=main",
-        f"--token={token}",
-    ], text=True)
+    release_notes = subprocess.check_output(
+        [
+            "python",
+            tmp.name,
+            "--sinceLatestTag",
+            "-r=DIRACGrid/DIRACOS2",
+            "--branches=main",
+            f"--token={token}",
+        ],
+        text=True,
+    )
     release_notes = "\n".join(release_notes.split("\n")[2:]).strip()
 
     previous_version, diff_without_builds, diff_full = changes_since_last_version(
@@ -462,7 +482,9 @@ def bump_version_in_main(new_version):
 
     if match := CONSTRUCT_VERSION_PATTERN.search(data):
         if Version(new_version) <= Version(match.groups()[0]):
-            logging.info("Skipping construct.yaml version bump as new_version is outdated")
+            logging.info(
+                "Skipping construct.yaml version bump as new_version is outdated"
+            )
             return
     else:
         raise NotImplementedError("Failed to find the version from construct.yaml")
