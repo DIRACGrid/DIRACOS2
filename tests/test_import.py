@@ -197,3 +197,18 @@ def test_module(moduleName):
       pytest.skip("WARN: " + msg + "(Possibly due to system graphic libraries not present)")
     else:
       pytest.fail("ERROR: " + msg)
+
+
+def test_gfal_plugins():
+    import gfal2
+
+    ctx = gfal2.creat_context()
+    plugins = ctx.get_plugin_names()
+    print(plugins)
+    plugins = dict(x.split("-", 1) for x in plugins)
+    assert "dcap" in plugins
+    assert "file" in plugins
+    assert "gridftp" in plugins
+    assert "http" in plugins
+    assert "sftp" in plugins
+    assert "xrootd" in plugins
