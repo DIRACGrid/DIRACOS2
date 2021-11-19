@@ -51,12 +51,10 @@ specs:
   - boto3
   - gfal2-util
   - fts3 >=0.0.0.1.dev2
+  - htcondor-utils  # [linux64]
   - nordugrid-arc  # [not osx]
   - python-gfal2
-  # Constrain the version for now until using 9.1.3+ is understood
-  # See emails about "HTCondor submission error" from the hackathon on 18/11/2021
-  - htcondor-utils 9.1.2 # [linux64]
-  - python-htcondor 9.1.2 # [linux64]
+  - python-htcondor  # [linux64]
   - rucio-clients
   - voms
   # Others
