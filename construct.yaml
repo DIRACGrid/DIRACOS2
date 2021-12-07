@@ -42,7 +42,7 @@ specs:
   # elasticsearch packages can be removed once DIRAC 7.3 is not used anymore - replaced by opensearch
   - elasticsearch <7.14
   - elasticsearch-dsl
-  - opensearchpy
+  - opensearch-py
   - opensearch-dsl
   - mysql-client
   # Earlier versions of mysqlclient were build with older MySQL versions
