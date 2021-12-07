@@ -64,6 +64,7 @@ specs:
   - voms
   # Others
   - cachetools
+  - db12
   - diraccfg
   - future
   - git
