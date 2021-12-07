@@ -39,6 +39,7 @@ specs:
   - tornado_m2crypto  # [not osx]
   # Databases
   - cmreshandler >1.0.0b4
+  # elasticsearch packages can be removed once DIRAC 7.3 is not used anymore - replaced by opensearch
   - elasticsearch <7.14
   - elasticsearch-dsl
   - opensearchpy
