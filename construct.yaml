@@ -6,6 +6,8 @@ version: 2.16a1
 channels:
   - diracgrid
   - conda-forge
+
+write_condarc: true
 conda_default_channels:
   - diracgrid
   - conda-forge
