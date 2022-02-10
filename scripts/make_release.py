@@ -94,11 +94,11 @@ def main(
             logging.info(
                 f"Releasing {this_version} next version will be {next_version}"
             )
-        # There should be once instance of the version string in the header and
-        # the rest should be "DIRACOS $VER". Check this is the case.
+        # There should be one instance of the version string in the header, one
+        # to set $INSTALLER_VER and the rest should be "DIRACOS $VER".
         assert (
             header.count(installer_metadata["VER"])
-            == header.count(f"DIRACOS {installer_metadata['VER']}") + 1
+            == header.count(f"DIRACOS {installer_metadata['VER']}") + 2
         )
         # Update the version in the installer to be the requested one
         header = header.replace(installer_metadata["VER"], this_version)
