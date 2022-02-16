@@ -46,7 +46,9 @@ specs:
   - elasticsearch-dsl
   - opensearch-py
   - opensearch-dsl
-  - mysql-client
+  # FIXME: We need to pin MySQL as 8.0.28 dropped support for TLS v1.0 and v1.1
+  # In principle MySQL v5.7.10 supports TLSv1.2 but it wasn't enabled in LHCb at least
+  - mysql-client =8.0.27
   # Earlier versions of mysqlclient were build with older MySQL versions
   - mysqlclient >=2.0.3
   - sqlalchemy
