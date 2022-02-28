@@ -43,9 +43,9 @@ jobs:
           use-mamba: true
       - name: Create installer
         run: |
-          CONDA_SUBDIR=${{ matrix.target_arch }} mamba create --name constructor-${{ matrix.target_arch }} conda-standalone
-          CONDA_STANDALONE_PATH="$(conda info --envs | grep constructor-${{ matrix.target_arch }} | sed -E 's@([^ ]+ +)@@g')/standalone_conda/conda.exe"
-          pip install git+http://github.com/chrisburr/constructor.git@diracos2-patches
+          CONDA_SUBDIR=${{ matrix.target_arch }} mamba create -c chrisburr/label/micromamba-dev --name constructor-${{ matrix.target_arch }} micromamba
+          CONDA_STANDALONE_PATH="$(conda info --envs | grep constructor-${{ matrix.target_arch }} | sed -E 's@([^ ]+ +)@@g')/bin/micromamba"
+          pip install git+http://github.com/chrisburr/constructor.git@miniforge-2022-02-17
           constructor . --platform="${{ matrix.target_arch }}" --conda-exe="${CONDA_STANDALONE_PATH}"
       - name: Upload installer
         uses: actions/upload-artifact@v2

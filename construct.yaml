@@ -29,7 +29,7 @@ exclude:
 ignore_duplicate_files: true
 
 specs:
-  - conda
+  - micromamba >=0.22.0
   - python 3.9.*
   - pip
   # Security
