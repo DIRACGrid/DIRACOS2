@@ -3,7 +3,7 @@
 # Create the diracosrc
 {
     echo "export DIRACOS=$PREFIX"
-    echo "export MAMBA_ROOT_PREFIX=$DIRACOS"
+    echo 'export MAMBA_ROOT_PREFIX=$DIRACOS'
     echo ''
     echo '# Initialise the conda environment in a way which ignores other conda installations'
     echo 'unset CONDA_SHLVL'
