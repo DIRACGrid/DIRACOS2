@@ -68,6 +68,7 @@ specs:
   - voms
   # Others
   - cachetools
+  - celery
   - db12
   - diraccfg
   - future
