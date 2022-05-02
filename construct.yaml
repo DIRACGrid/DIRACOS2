@@ -56,6 +56,7 @@ specs:
   # Middleware
   - apache-libcloud
   - boto3
+  - gfal2
   - gfal2-util
   - fts3 >=3.12
   - nordugrid-arc  # [not osx]
