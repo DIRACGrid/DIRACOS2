@@ -28,6 +28,9 @@ exclude:
 # When this happens the issue should be fixed upstream in conda-forge
 ignore_duplicate_files: true
 
+# Many of these have lower pins to avoid potential issues where the solver
+# selects an older version to avoid conflicts. This is particularly prone to
+# happening when an old version has incorrect version pins
 specs:
   - micromamba >=0.22.0
   - python 3.9.*
@@ -51,27 +54,27 @@ specs:
   - mysql-client =8.0.27
   # Earlier versions of mysqlclient were build with older MySQL versions
   - mysqlclient >=2.0.3
-  - sqlalchemy
+  - sqlalchemy >=1.4.36
   - stomp.py =4.1.23
   # Middleware
-  - apache-libcloud
-  - boto3
-  - gfal2
-  - gfal2-util
+  - apache-libcloud >=3.5.1
+  - boto3 >=1.5.11
+  - gfal2 >=2.20.5
+  - gfal2-util >=1.7.1
   - fts3 >=3.12
-  - nordugrid-arc  # [not osx]
-  - python-gfal2
+  - nordugrid-arc >=6.15.1  # [not osx]
+  - python-gfal2 >=1.11.0
   # Constrain the version for now until using 9.1.3+ is understood
   # See emails about "HTCondor submission error" from the hackathon on 18/11/2021
   - htcondor-utils 9.1.2 # [linux64]
   - python-htcondor 9.1.2 # [linux64]
-  - rucio-clients
+  - rucio-clients >=1.28.2
   - voms
   # Others
   - cachetools
-  - celery
-  - db12
-  - diraccfg
+  - celery >=5.2.6
+  - db12 >=1.0.4
+  - diraccfg >=0.2.2
   - future
   - git
   - gitpython >=2.1.0
