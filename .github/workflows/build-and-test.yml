@@ -70,7 +70,7 @@ jobs:
         run: |
           bash DIRACOS-*.sh
           source diracos/diracosrc
-          conda env export --file environment.yaml
+          conda env export --file environment.yaml --prefix $DIRACOS
       - name: Upload environment.yaml
         uses: actions/upload-artifact@v2
         with:
