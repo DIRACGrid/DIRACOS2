@@ -5,6 +5,11 @@
     echo "export DIRACOS=$PREFIX"
     echo 'export MAMBA_ROOT_PREFIX=$DIRACOS'
     echo ''
+    echo '# Some sites set variables which are actively harmful'
+    echo 'unset GFAL_CONFIG_DIR GFAL_PLUGIN_DIR GLEXEC_LOCATION GLITE_LOCATION_VAR'
+    echo 'unset GLITE_LOCATION GLOBUS_LOCATION JAVA_HOME LCG_LOCATION'
+    echo 'unset LD_LIBRARY_PATH LESSOPEN MANPATH PERL5LIB PYTHONPATH SRM_PATH'
+    echo ''
     echo '# Initialise the conda environment in a way which ignores other conda installations'
     echo 'unset CONDA_SHLVL'
     echo 'eval "$(${DIRACOS}/bin/micromamba shell hook activate -s bash)"'
