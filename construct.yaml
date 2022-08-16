@@ -94,7 +94,9 @@ specs:
   - singularity >=3.7  # [not osx]
   - six
   - subprocess32
-  - suds-jurko >=0.6  # [not (osx and arm64)]
+  - suds >=1.0
+  # HACK: Workaround for suds-jerko, see DIRACGrid/DIRAC#6322
+  - suds-jurko-compat
   - tornado *+dirac*  # [not osx]
   - xmltodict
   - importlib_resources
