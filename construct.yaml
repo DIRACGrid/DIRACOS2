@@ -41,7 +41,7 @@ specs:
   - m2crypto >=0.38
   - pyasn1 >0.4.1
   - pyasn1-modules
-  - tornado_m2crypto  # [not osx]
+  - tornado_m2crypto
   # Databases
   - cmreshandler >1.0.0b4
   # elasticsearch packages can be removed once DIRAC 7.3 is not used anymore - replaced by opensearch
@@ -96,7 +96,7 @@ specs:
   - suds >=1.0
   # HACK: Workaround for suds-jerko, see DIRACGrid/DIRAC#6322
   - suds-jurko-compat
-  - tornado *+dirac*  # [not osx]
+  - tornado *+dirac*
   - xmltodict
   - importlib_resources
   # Temporary workaround until we have releases with https://github.com/DIRACGrid/DIRAC/pull/6458
