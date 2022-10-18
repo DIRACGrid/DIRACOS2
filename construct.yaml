@@ -106,6 +106,7 @@ specs:
   - hypothesis
   - ipython
   - mock
+  - prmon  # [linux]
   - pytest
   - recommonmark
   # Probably not needed
