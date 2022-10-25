@@ -36,6 +36,9 @@ parametrize = pytest.mark.parametrize
 
 moduleNames = [
     "arc",
+    # arc/__init__.py supresses errors
+    "arc.common",
+    "_arc",
     "argparse",
     "array",
     "ast",
