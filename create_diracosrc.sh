@@ -51,6 +51,8 @@
     echo 'if ! checkDir "${X509_VOMSES:-}" ; then'
     echo "  export X509_VOMSES='${PREFIX}/etc/grid-security/vomses'"
     echo 'fi'
+    echo '# Add HTCondorCE related settings: limit authentication methods'
+    echo 'export _CONDOR_SEC_CLIENT_AUTHENTICATION_METHODS=GSI,SCITOKENS'
     echo ''
 } > "$PREFIX/diracosrc"
 
