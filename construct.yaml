@@ -101,6 +101,8 @@ specs:
   - tornado *+dirac*  # [not osx]
   - xmltodict
   - importlib_resources
+  # Temporary workaround until we have releases with https://github.com/DIRACGrid/DIRAC/pull/6458
+  - importlib_metadata <5.0.0
   # Testing and development
   - bat
   - docutils
