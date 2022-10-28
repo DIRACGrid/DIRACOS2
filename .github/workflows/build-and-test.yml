@@ -49,7 +49,7 @@ jobs:
           if [ "${{ matrix.target_arch }}" = osx-64 ]; then
               export CONDA_OVERRIDE_OSX=10.12
           fi
-          constructor . --platform="${{ matrix.target_arch }}" --conda-exe="${CONDA_STANDALONE_PATH}"
+          CONDA_SUBDIR=${{ matrix.target_arch }} constructor . --platform="${{ matrix.target_arch }}" --conda-exe="${CONDA_STANDALONE_PATH}"
       - name: Upload installer
         uses: actions/upload-artifact@v2
         with:
