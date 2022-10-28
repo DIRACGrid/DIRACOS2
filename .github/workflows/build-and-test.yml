@@ -48,6 +48,8 @@ jobs:
           pip install git+http://github.com/conda/constructor.git@3.3.1
           if [ "${{ matrix.target_arch }}" = osx-64 ]; then
               export CONDA_OVERRIDE_OSX=10.12
+          elif [ "${{ matrix.target_arch }}" = linux-64 ]; then
+              export CONDA_OVERRIDE_GLIBC=2.17
           fi
           CONDA_SUBDIR=${{ matrix.target_arch }} constructor . --platform="${{ matrix.target_arch }}" --conda-exe="${CONDA_STANDALONE_PATH}"
       - name: Upload installer
