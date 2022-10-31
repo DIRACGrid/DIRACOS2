@@ -236,6 +236,7 @@ jobs:
       fail-fast: false
       matrix:
         dirac-branch:
+          - rel-v8r0
           - integration
     steps:
       - uses: actions/checkout@v2
