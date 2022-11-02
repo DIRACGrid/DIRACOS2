@@ -155,7 +155,7 @@ jobs:
       - name: Run tests
         run: |
            bash DIRACOS-*.sh
-           set -u
+           set -x
            source diracos/diracosrc
            pip install DIRAC
 
