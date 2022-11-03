@@ -223,3 +223,21 @@ def test_gfal_plugins():
     assert "sftp" in plugins
     assert "srm" in plugins
     assert "xrootd" in plugins
+
+
+def test_arc():
+    import arc
+
+    arc.common.UserConfig
+    arc.ComputingServiceRetriever
+    arc.Endpoint
+    arc.Job
+    arc.JobDescription_Parse
+    arc.JobDescriptionList
+    arc.JobList
+    arc.JobSupervisor
+    arc.Period
+    arc.SubmissionStatus
+    arc.Submitter
+    arc.Time
+    arc.URL
