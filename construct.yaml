@@ -32,6 +32,8 @@ ignore_duplicate_files: true
 # selects an older version to avoid conflicts. This is particularly prone to
 # happening when an old version has incorrect version pins
 specs:
+  # Workaround for https://github.com/conda-forge/micromamba-feedstock/issues/100
+  - micromamba 0.27.0=2 # [osx]
   - micromamba >=0.22.0
   - python 3.9.*
   - pip
