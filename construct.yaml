@@ -32,8 +32,6 @@ ignore_duplicate_files: true
 # selects an older version to avoid conflicts. This is particularly prone to
 # happening when an old version has incorrect version pins
 specs:
-  # Workaround for https://github.com/conda-forge/micromamba-feedstock/issues/100
-  - micromamba 0.27.0=2 # [osx]
   - micromamba >=0.22.0
   - python 3.9.*
   - pip
@@ -64,8 +62,6 @@ specs:
   - gfal2 >=2.20.5
   - gfal2-util >=1.7.1
   - fts3 >=3.12
-  # Workaround for buggy 6.16.0 and 6.16.1 builds
-  - nordugrid-arc 6.15.1  # [not osx]
   - nordugrid-arc >=6.15.1  # [not osx]
   - python-gfal2 >=1.11.0
   # Constrain the version for now until using 9.1.3+ is understood
