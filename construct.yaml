@@ -116,6 +116,9 @@ specs:
   - prmon  # [linux]
   - pytest
   - recommonmark
+  - authlib >=1.0.0
+  - pyjwt
+  - dominate
   # Probably not needed
   - lz4
   - python-xxhash
