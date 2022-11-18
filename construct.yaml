@@ -74,6 +74,7 @@ specs:
   - python-htcondor =9.0 # [linux64]
   - rucio-clients >=1.28.2
   - voms
+  - oidc-agent  # [not (osx and arm64)]
   # Others
   - cachetools
   - celery >=5.2.6
