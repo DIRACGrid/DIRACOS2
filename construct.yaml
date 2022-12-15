@@ -32,15 +32,13 @@ ignore_duplicate_files: true
 # selects an older version to avoid conflicts. This is particularly prone to
 # happening when an old version has incorrect version pins
 specs:
-  # Workaround for https://github.com/conda-forge/micromamba-feedstock/issues/100
-  - micromamba 0.27.0=2 # [osx]
   - micromamba >=0.22.0
   - python 3.9.*
   - pip
+  - openssl >=3
   # Security
   - certifi
-  # M2crypto is buggy from 0.38 https://gitlab.com/m2crypto/m2crypto/-/issues/298
-  - m2crypto >=0.36,<0.38
+  - m2crypto >=0.38
   - pyasn1 >0.4.1
   - pyasn1-modules
   - tornado_m2crypto  # [not osx]
