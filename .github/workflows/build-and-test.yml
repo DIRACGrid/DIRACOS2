@@ -169,7 +169,6 @@ jobs:
       fail-fast: false
       matrix:
         dirac-branch:
-          - rel-v7r2
           - rel-v7r3
     steps:
       - uses: actions/checkout@v2
