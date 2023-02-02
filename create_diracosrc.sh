@@ -28,7 +28,7 @@
     echo ''
     echo '# Function check if folder exist and contains files'
     echo 'function checkDir () {'
-    echo '  resolvedDir=$(realpath "${1}")'
+    echo '  resolvedDir=$(realpath -q "${1}")'
     echo '  if [ -z "${resolvedDir}" ]; then'
     echo '    return 1'
     echo '  fi'
