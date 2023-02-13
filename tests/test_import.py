@@ -232,7 +232,7 @@ def test_arc():
     arc.ComputingServiceRetriever
     arc.Endpoint
     arc.Job
-    arc.JobDescription_Parse
+    arc.JobDescription.Parse
     arc.JobDescriptionList
     arc.JobList
     arc.JobSupervisor
