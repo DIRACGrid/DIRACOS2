@@ -24,14 +24,14 @@ jobs:
       matrix:
         target_arch: ["linux-64", "linux-aarch64", "linux-ppc64le", "osx-arm64", "osx-64"]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - id: get-date
-        run: echo "::set-output name=year-and-week::$(date +"%Y-W%U")"
+        run: echo "year-and-week=$(date +"%Y-W%U")" >> $GITHUB_OUTPUT
         shell: bash
       - name: Keep constructor cache between invocations
         # This is big help to avoid needing to transmuting packages every time
         id: cache-transmuted-packages
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.conda/constructor
           key: ${{ runner.os }}-${{ matrix.target_arch }}-constructor-${{ steps.get-date.outputs.year-and-week }}
@@ -92,7 +92,7 @@ jobs:
       run:
         shell: bash -l {0}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Download artifacts
         uses: actions/download-artifact@v2
         with:
@@ -129,7 +129,7 @@ jobs:
           - "centos:7"
           - "centos:8"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Download installer
         uses: actions/download-artifact@v2
         with:
@@ -147,7 +147,7 @@ jobs:
       matrix:
         os: [macos-11, macos-12]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Download installer
         uses: actions/download-artifact@v2
         with:
@@ -171,7 +171,7 @@ jobs:
         dirac-branch:
           - rel-v7r3
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-python@v2
         with:
           python-version: '3.9'
@@ -205,7 +205,7 @@ jobs:
         dirac-branch:
           - rel-v7r3
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-python@v2
         with:
           python-version: '3.9'
@@ -238,7 +238,7 @@ jobs:
           - rel-v8r0
           - integration
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-python@v2
         with:
           python-version: '3.9'
