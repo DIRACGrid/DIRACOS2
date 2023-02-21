@@ -67,7 +67,7 @@ specs:
   - htcondor-utils =9.0 # [linux64]
   - python-htcondor =9.0 # [linux64]
   - rucio-clients >=1.28.2
-  - voms
+  - voms >=2.1.0rc3
   # Others
   - cachetools
   - celery >=5.2.6
