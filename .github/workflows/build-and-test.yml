@@ -11,6 +11,7 @@ on:
       - main
   schedule:
     - cron:  '6 2 * * *'
+  workflow_dispatch:
 
 jobs:
   build-installer:
