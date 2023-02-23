@@ -5,7 +5,7 @@
 # or -h, or without. Any of these should be working
 # otherwise we consider it an issue
 
-scriptsToTest=(mysql gfal-ls gfal-stat myproxy-info voms-proxy-init rrdtool);
+scriptsToTest=(mysql gfal-ls gfal-stat voms-proxy-init rrdtool);
 rc=0
 
 for script in "${scriptsToTest[@]}"; do

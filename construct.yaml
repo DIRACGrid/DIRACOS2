@@ -77,7 +77,6 @@ specs:
   - git
   - gitpython >=2.1.0
   - matplotlib-base
-  - myproxy  # [not osx]
   - numpy
   - openssh
   - pexpect >=4.0.1
