@@ -51,7 +51,7 @@ specs:
   - opensearch-dsl
   - mysql-client
   # Earlier versions of mysqlclient were build with older MySQL versions
-  - mysqlclient >=2.0.3
+  - mysqlclient >=2.0.3,<2.1
   - sqlalchemy >=1.4.36
   - stomp.py =4.1.23
   # Middleware
