@@ -110,7 +110,8 @@ specs:
   - prmon  # [linux]
   - pytest
   - recommonmark
-  - authlib >=1.0.0
+  # HACK: Authlib 1.2.1 doesn't work with DIRAC 8.0+ https://github.com/DIRACGrid/DIRAC/pull/7078
+  - authlib >=1.0.0,<1.2.1
   - pyjwt
   - dominate
   # Probably not needed
