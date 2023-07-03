@@ -89,7 +89,7 @@ specs:
   - psutil >=4.2.0
   - packaging >=21.2
   - pycurl
-  - pydantic <2
+  - pydantic
   - python-json-logger >=0.1.8
   - pytz >=2015.7
   - requests >=2.9.1
