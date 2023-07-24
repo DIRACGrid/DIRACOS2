@@ -12,7 +12,7 @@
     echo ''
     echo '# Initialise the conda environment in a way which ignores other conda installations'
     echo 'unset CONDA_SHLVL'
-    echo 'eval "$(${DIRACOS}/bin/micromamba shell hook activate -s bash)"'
+    echo 'eval "$(PS1="${PS1:-}" ${DIRACOS}/bin/micromamba shell hook activate -s bash)"'
     echo 'micromamba activate "$DIRACOS"'
     echo ''
     echo '# Silence python warnings'
