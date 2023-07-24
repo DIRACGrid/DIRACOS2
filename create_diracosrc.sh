@@ -60,9 +60,6 @@
 
 echo "DIRACOS2 $INSTALLER_VER" > "$PREFIX/.diracos_version"
 
-# Workaround for the incorrect etc directory in v7r2
-ln -s "$PREFIX/etc" "$PREFIX/lib/python3.9/site-packages/etc"
-
 # Print further install instructions
 echo ""
 echo "DIRACOS has been installed sucessfully in $PREFIX"
