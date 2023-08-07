@@ -89,7 +89,6 @@ specs:
   - pytz >=2015.7
   - requests >=2.9.1
   - rrdtool  # [not (osx and arm64)]
-  - singularity >=3.7  # [not osx]
   - apptainer >=1.2  # [not osx]
   - six
   - subprocess32
