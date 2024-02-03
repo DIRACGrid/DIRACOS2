@@ -113,6 +113,8 @@ specs:
   - authlib >=1.0.0,<1.2.1
   - pyjwt
   - dominate
+  # HACK: Avoid https://its.cern.ch/jira/browse/DMC-1401
+  - libxml2 =2.11.6
   # Probably not needed
   - lz4
   - python-xxhash
