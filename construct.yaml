@@ -71,6 +71,7 @@ specs:
   # Others
   - cachetools
   - celery >=5.2.6
+  - cwltool
   - db12 >=1.0.4
   - diraccfg >=0.2.2
   - future
