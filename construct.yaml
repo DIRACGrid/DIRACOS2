@@ -38,7 +38,8 @@ specs:
   - openssl >=3
   # Security
   - certifi
-  - m2crypto >=0.38
+  # https://github.com/DIRACGrid/DIRAC/pull/7568
+  - m2crypto >=0.38,<0.40.0
   - pyasn1 >0.4.1
   - pyasn1-modules
   - tornado_m2crypto
