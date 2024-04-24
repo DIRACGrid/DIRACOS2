@@ -95,7 +95,7 @@ specs:
   # Use a custom build of apptainer to workaround:
   #  * https://github.com/apptainer/apptainer/issues/2166
   #  * https://github.com/apptainer/apptainer/issues/2167
-  - apptainer 1.3.0 *_734000  # [not osx]
+  - apptainer 1.2.5 *_734000  # [not osx]
   - six
   - subprocess32
   - suds >=1.0
