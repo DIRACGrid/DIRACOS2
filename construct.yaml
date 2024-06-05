@@ -77,7 +77,9 @@ specs:
   - db12 >=1.0.4
   - diraccfg >=0.2.2
   - future
-  - git
+  # Pin the git version to avoid this bug
+  # https://lore.kernel.org/git/20240529102307.GF1098944@coredump.intra.peff.net/T/#t
+  - git <=2.45.0
   - gitpython >=2.1.0
   - matplotlib-base
   - numpy
