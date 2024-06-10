@@ -8,6 +8,7 @@ import logging
 import re
 import subprocess
 import tempfile
+import time
 import zipfile
 
 from packaging.version import Version, InvalidVersion
@@ -502,7 +503,10 @@ def bump_version_in_main(new_version):
         "sha": file_info["sha"],
         "branch": "main",
     }
-    logging.info(f"Bumping version with: {data}")
+    logging.info(f"Bumping version of {file_info['url']} with: {data}")
+    # At some point the following PUT started failing with 409 Conflict
+    # Let's try adding a sleep to see if that avoids the issue
+    time.sleep(30)
     r = requests.put(
         file_info["url"],
         json=data,
