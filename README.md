@@ -23,7 +23,7 @@ curl -LO https://github.com/DIRACGrid/DIRACOS2/releases/latest/download/DIRACOS-
 bash DIRACOS-Linux-x86_64.sh
 ```
 
-It can then be activated in a similar way to version 1 of DIRACOS, by calling ` source "$PWD/diracos/diracosrc"`.
+It can then be activated in a similar way to version 1 of DIRACOS, by calling `source "$PWD/diracos/diracosrc"`.
 Further usage instructions are shown after installation.
 
 ## Advanced documentation
