@@ -81,6 +81,7 @@ specs:
   # https://lore.kernel.org/git/20240529102307.GF1098944@coredump.intra.peff.net/T/#t
   - git <=2.45.0
   - gitpython >=2.1.0
+  - git-lfs
   - matplotlib-base
   - numpy
   - openssh
