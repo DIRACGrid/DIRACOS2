@@ -8,7 +8,9 @@ dependencies:
   - pip
   # Constructor itself
   - constructor
-  - conda
+  - libmambapy
+  # Workaround for https://github.com/conda/conda/issues/12219
+  - conda 22.9.0
   # For creating release notes and releases
   - packaging
   - requests
