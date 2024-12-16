@@ -33,14 +33,13 @@ ignore_duplicate_files: true
 # selects an older version to avoid conflicts. This is particularly prone to
 # happening when an old version has incorrect version pins
 specs:
-  - micromamba >=0.22.0
+  - micromamba >=0.22.0,<2
   - python 3.11.*
   - pip
   - openssl >=3
   # Security
   - certifi
-  # https://github.com/DIRACGrid/DIRAC/pull/7568
-  - m2crypto >=0.38,<0.40.0
+  - m2crypto >=0.43
   - pyasn1 >0.4.1
   - pyasn1-modules
   - tornado_m2crypto
@@ -95,10 +94,7 @@ specs:
   - pytz >=2015.7
   - requests >=2.9.1
   - rrdtool  # [not (osx and arm64)]
-  # Use a custom build of apptainer to workaround:
-  #  * https://github.com/apptainer/apptainer/issues/2166
-  #  * https://github.com/apptainer/apptainer/issues/2167
-  - apptainer 1.2.5 *_734000  # [not osx]
+  - apptainer  # [not osx]
   - six
   - subprocess32
   - suds >=1.0
@@ -107,8 +103,7 @@ specs:
   - tornado *+dirac*
   - xmltodict
   - importlib_resources <6
-  # Temporary workaround until we have releases with https://github.com/DIRACGrid/DIRAC/pull/6458
-  - importlib_metadata <5.0.0
+  - importlib_metadata
   # Testing and development
   - bat
   - docutils
