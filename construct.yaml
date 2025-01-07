@@ -120,3 +120,4 @@ specs:
   - lz4
   - python-xxhash
   - xrootd >=5
+  - ldap3
