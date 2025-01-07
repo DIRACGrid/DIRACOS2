@@ -37,3 +37,5 @@ jobs:
         if: ${{ failure() }}
         with:
           limit-access-to-actor: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
