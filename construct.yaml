@@ -4,7 +4,6 @@ name: DIRACOS
 version: 2.47a1
 
 channels:
-  - diracgrid/label/apptainer-2166
   - diracgrid
   - conda-forge
 
@@ -94,7 +93,7 @@ specs:
   - pytz >=2015.7
   - requests >=2.9.1
   - rrdtool  # [not (osx and arm64)]
-  - apptainer  # [not osx]
+  - apptainer >=1.3.6  # [not osx]
   - six
   - subprocess32
   - suds >=1.0
