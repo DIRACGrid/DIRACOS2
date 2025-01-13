@@ -44,9 +44,6 @@ specs:
   - tornado_m2crypto
   # Databases
   - cmreshandler >1.0.0b4
-  # elasticsearch packages can be removed once DIRAC 7.3 is not used anymore - replaced by opensearch
-  - elasticsearch <7.14
-  - elasticsearch-dsl
   - opensearch-py
   - opensearch-dsl
   - mysql-client
@@ -60,7 +57,7 @@ specs:
   - gfal2 >=2.20.5
   - gfal2-util >=1.7.1
   - fts3 >=3.12
-  #  - nordugrid-arc >=6.21  # [not osx]
+  - nordugrid-arc >=6.21  # [not osx]
   - python-gfal2 >=1.11.0
   - htcondor-utils >=24.2 # [linux]
   - python-htcondor >=24.2 # [linux]
