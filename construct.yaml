@@ -62,10 +62,8 @@ specs:
   - fts3 >=3.12
   - nordugrid-arc >=6.15.1  # [not osx]
   - python-gfal2 >=1.11.0
-  # Constrain the version for now until using 9.1.3+ is understood
-  # See emails about "HTCondor submission error" from the hackathon on 18/11/2021
-  - htcondor-utils =9.0 # [linux]
-  - python-htcondor =9.0 # [linux]
+  - htcondor-utils >=24.2 # [linux]
+  - python-htcondor >=24.2 # [linux]
   - rucio-clients >=1.28.2
   - voms >=2.1.0rc3
   # Others
