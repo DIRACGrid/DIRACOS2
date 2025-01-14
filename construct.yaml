@@ -4,7 +4,6 @@ name: DIRACOS
 version: 2.47a1
 
 channels:
-  - diracgrid/label/apptainer-2166
   - diracgrid
   - conda-forge
 
@@ -45,12 +44,14 @@ specs:
   - tornado_m2crypto
   # Databases
   - cmreshandler >1.0.0b4
-  # elasticsearch packages can be removed once DIRAC 7.3 is not used anymore - replaced by opensearch
-  - elasticsearch <7.14
-  - elasticsearch-dsl
   - opensearch-py
   - opensearch-dsl
   - mysql-client
+  # elasticsearch packages can be removed once DIRAC 7.3 is not used anymore - replaced by opensearch
+  # They can't actually be removed yet as DIRAC stil has it in the dependencies
+  - elasticsearch <7.14
+  - elasticsearch-dsl
+  - numpy <2  # elasticsearch<7.14 needs numpy 1.x, remove this constraint when elasticsearch is removed
   # Earlier versions of mysqlclient were build with older MySQL versions
   - mysqlclient >=2.0.3,<2.1
   - sqlalchemy >=1.4.36
@@ -61,13 +62,11 @@ specs:
   - gfal2 >=2.20.5
   - gfal2-util >=1.7.1
   - fts3 >=3.12
-  - nordugrid-arc >=6.15.1  # [not osx]
-  - python-gfal2 >=1.11.0
-  # Constrain the version for now until using 9.1.3+ is understood
-  # See emails about "HTCondor submission error" from the hackathon on 18/11/2021
-  - htcondor-utils =9.0 # [linux]
-  - python-htcondor =9.0 # [linux]
-  - rucio-clients >=1.28.2
+  - nordugrid-arc >=6.21  # [not osx]
+  - python-gfal2 >=1.13.0
+  - htcondor-utils >=24.2 # [linux]
+  - python-htcondor >=24.2 # [linux]
+  - rucio-clients >=36.0.0
   - voms >=2.1.0rc3
   # Others
   - cachetools
@@ -76,9 +75,7 @@ specs:
   - db12 >=1.0.4
   - diraccfg >=0.2.2
   - future
-  # Pin the git version to avoid this bug
-  # https://lore.kernel.org/git/20240529102307.GF1098944@coredump.intra.peff.net/T/#t
-  - git <=2.45.0
+  - git >=2.46
   - gitpython >=2.1.0
   - git-lfs
   - matplotlib-base
@@ -94,7 +91,7 @@ specs:
   - pytz >=2015.7
   - requests >=2.9.1
   - rrdtool  # [not (osx and arm64)]
-  - apptainer  # [not osx]
+  - apptainer >=1.3.6  # [not osx]
   - six
   - subprocess32
   - suds >=1.0
