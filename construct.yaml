@@ -47,6 +47,10 @@ specs:
   - opensearch-py
   - opensearch-dsl
   - mysql-client
+  # elasticsearch packages can be removed once DIRAC 7.3 is not used anymore - replaced by opensearch
+  # They can't actually be removed yet as DIRAC stil has it in the dependencies
+  - elasticsearch <7.14
+  - elasticsearch-dsl
   # Earlier versions of mysqlclient were build with older MySQL versions
   - mysqlclient >=2.0.3,<2.1
   - sqlalchemy >=1.4.36
