@@ -51,6 +51,7 @@ specs:
   # They can't actually be removed yet as DIRAC stil has it in the dependencies
   - elasticsearch <7.14
   - elasticsearch-dsl
+  - numpy <2  # elasticsearch<7.14 needs numpy 1.x, remove this constraint when elasticsearch is removed
   # Earlier versions of mysqlclient were build with older MySQL versions
   - mysqlclient >=2.0.3,<2.1
   - sqlalchemy >=1.4.36
@@ -62,10 +63,10 @@ specs:
   - gfal2-util >=1.7.1
   - fts3 >=3.12
   - nordugrid-arc >=6.21  # [not osx]
-  - python-gfal2 >=1.11.0
+  - python-gfal2 >=1.13.0
   - htcondor-utils >=24.2 # [linux]
   - python-htcondor >=24.2 # [linux]
-  - rucio-clients >=1.28.2
+  - rucio-clients >=36.0.0
   - voms >=2.1.0rc3
   # Others
   - cachetools
