@@ -497,16 +497,26 @@ def bump_version_in_main(new_version):
     if num_subs != 1:
         raise RuntimeError(num_subs)
 
+    branch_name = f"bump-version-to-{new_version}"
     data = {
         "message": f"Bump version to {new_version}",
         "content": base64.b64encode(new_data.encode()).decode(),
         "sha": file_info["sha"],
-        "branch": "main",
+        "branch": branch_name,
     }
     logging.info(f"Bumping version of {file_info['url']} with: {data}")
-    # At some point the following PUT started failing with 409 Conflict
-    # Let's try adding a sleep to see if that avoids the issue
-    time.sleep(30)
+
+    # Make a branch
+    r = requests.get(f"{api_root}/git/ref/heads/main", headers=headers)
+    r.raise_for_status()
+    rev = r.json()["object"]["sha"]
+    r = requests.post(
+        f"{api_root}/git/refs",
+        json={"ref": f"refs/heads/{branch_name}", "sha": rev},
+        headers=headers,
+    )
+
+    # Update the file
     r = requests.put(
         file_info["url"],
         json=data,
@@ -516,6 +526,19 @@ def bump_version_in_main(new_version):
     logging.info(
         f"Pushed commit to bump version to {new_version} as {r.json()['commit']['html_url']}"
     )
+
+    # Open the merge request
+    r = requests.post(
+        f"{api_root}/pulls",
+        json={
+            "title": f"Bump version to {new_version}",
+            "head": branch_name,
+            "base": "main",
+            "body": f"This PR bumps the version to {new_version}.",
+        },
+        headers=headers,
+    )
+    r.raise_for_status()
 
 
 # Crude unit tests for get_version
