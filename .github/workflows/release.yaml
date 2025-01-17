@@ -27,6 +27,7 @@ jobs:
           environment-file: scripts/environment.yml
       - name: Create release
         run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" >> tmp.xxx
           scripts/make_release.py \
             --token="${{ secrets.GITHUB_TOKEN }}" \
             --run-id="${{ github.event.inputs.run_id }}" \
@@ -37,5 +38,3 @@ jobs:
         if: ${{ failure() }}
         with:
           limit-access-to-actor: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
