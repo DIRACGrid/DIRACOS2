@@ -35,7 +35,7 @@ jobs:
             --make-release
       - name: Setup upterm session
         # uses: lhotari/action-upterm@v1
-        uses: chrisburr/action-upterm@patch-2
+        uses: chrisburr/action-upterm@patch-1
         if: ${{ failure() }}
         with:
           limit-access-to-actor: true
