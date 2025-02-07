@@ -58,7 +58,8 @@ specs:
   - stomp.py >8
   # Middleware
   - apache-libcloud >=3.5.1
-  - boto3 >=1.5.11
+  # https://github.com/aws/aws-cli/issues/9214
+  - boto3 <1.36
   - gfal2 >=2.20.5
   - gfal2-util >=1.7.1
   - fts3 >=3.12
