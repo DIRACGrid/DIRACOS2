@@ -27,9 +27,8 @@ jobs:
           environment-file: scripts/environment.yml
       - name: Create release
         run: |
-          echo "${{ secrets.GITHUB_TOKEN }}" >> tmp.xxx
           scripts/make_release.py \
-            --token="${{ secrets.GITHUB_TOKEN }}" \
+            --token="${{ secrets.GH_TOKEN }}" \
             --run-id="${{ github.event.inputs.run_id }}" \
             --version="${{ github.event.inputs.version }}" \
             --make-release
