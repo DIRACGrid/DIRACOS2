@@ -52,7 +52,7 @@ jobs:
           fi
           CONDA_SUBDIR=${{ matrix.target_arch }} constructor . --platform="${{ matrix.target_arch }}" --conda-exe="${CONDA_STANDALONE_PATH}"
       - name: Upload installer
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: installer-${{ matrix.target_arch }}
           path: DIRACOS-*.sh
@@ -67,7 +67,7 @@ jobs:
         target_arch: ["linux-64"]
     steps:
       - name: Download installer
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: installer-${{ matrix.target_arch }}
       - name: Generate environment.yaml
@@ -76,7 +76,7 @@ jobs:
           source diracos/diracosrc
           conda env export --file environment.yaml --prefix $DIRACOS
       - name: Upload environment.yaml
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: environment-yaml-${{ matrix.target_arch }}
           path: |
@@ -93,7 +93,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           path: artifacts
       - name: Prepare environment
@@ -108,7 +108,7 @@ jobs:
             > release-notes.md
           cat release-notes.md
       - name: Upload release-notes.md
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: release-notes
           path: |
@@ -128,7 +128,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Download installer
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: installer-linux-64
       - name: Run tests
@@ -146,7 +146,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Download installer
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: installer-osx-64
       - name: Run tests
@@ -168,7 +168,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Download installer
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: installer-osx-arm64
       - name: Run tests
@@ -195,7 +195,7 @@ jobs:
         with:
           python-version: '3.9'
       - name: Download installer
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: installer-linux-64
       - name: Prepare environment
