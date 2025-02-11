@@ -62,8 +62,6 @@ specs:
   - boto3 <1.36
   - gfal2 >=2.20.5
   - gfal2-util >=1.7.1
-  # https://github.com/cern-fts/davix/issues/137
-  - davix < 0.8.8
   - fts3 >=3.12
   - nordugrid-arc >=6.21  # [not osx]
   - python-gfal2 >=1.13.0
