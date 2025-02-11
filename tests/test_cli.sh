@@ -48,11 +48,11 @@ if ! singularity version; then
   echo "singularity version not working";
   rc=1;
 fi
-if ! singularity build --force --sandbox lolcow docker://godlovedc/lolcow; then
+if ! singularity build --force --sandbox hello-world docker://hello-world; then
   echo "singularity build not working";
   rc=1;
 fi
-if ! (singularity --verbose --debug run -u lolcow || (singularity --verbose --debug run -u lolcow 2>&1 | grep -E 'Failed to create user namespace: (Operation not permitted|Invalid argument)')); then
+if ! (singularity --verbose --debug run -u hello-world || (singularity --verbose --debug run -u hello-world 2>&1 | grep -E 'Failed to create user namespace: (Operation not permitted|Invalid argument)')); then
   echo "singularity run not working";
   rc=1;
 fi
@@ -62,11 +62,11 @@ if ! apptainer version; then
   echo "apptainer version not working";
   rc=1;
 fi
-if ! apptainer build --force --sandbox lolcow docker://godlovedc/lolcow; then
+if ! apptainer build --force --sandbox hello-world2 docker://hello-world; then
   echo "apptainer build not working";
   rc=1;
 fi
-if ! (apptainer --verbose --debug run -u lolcow || (apptainer --verbose --debug run -u lolcow 2>&1 | grep -E 'Failed to create user namespace: (Operation not permitted|Invalid argument)')); then
+if ! (apptainer --verbose --debug run -u hello-world2 || (apptainer --verbose --debug run -u hello-world2 2>&1 | grep -E 'Failed to create user namespace: (Operation not permitted|Invalid argument)')); then
   echo "apptainer run not working";
   rc=1;
 fi

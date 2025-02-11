@@ -118,21 +118,31 @@ jobs:
     name: Basic tests
     if: github.repository == 'DIRACGrid/DIRACOS2'
     needs: build-installer
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        docker-image:
-          - "centos:7"
-          - "centos:8"
+        include:
+          # x86_64 tests: run against CentOS 7 and 8 with the linux-64 installer
+          - os: ubuntu-latest
+            docker_image: centos:7
+            installer: installer-linux-64
+          - os: ubuntu-latest
+            docker_image: centos:8
+            installer: installer-linux-64
+          # ARM tests: run only AlmaLinux 9 tests with the linux-aarch64 installer
+          - os: ubuntu-24.04-arm
+            docker_image: almalinux:9
+            installer: installer-linux-aarch64
+
     steps:
       - uses: actions/checkout@v3
       - name: Download installer
         uses: actions/download-artifact@v4
         with:
-          name: installer-linux-64
+          name: ${{ matrix.installer }}
       - name: Run tests
-        run: scripts/run_basic_tests.sh ${{ matrix.docker-image }} DIRACOS-*.sh
+        run: scripts/run_basic_tests.sh ${{ matrix.docker_image }} DIRACOS-*.sh
 
   macos-64-tests:
     name: macOS (x86_64) tests

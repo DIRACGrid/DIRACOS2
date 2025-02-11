@@ -134,7 +134,10 @@ def get_artifacts_zip(artifacts, artifact_name):
         stream=True,
     )
     r.raise_for_status()
-    decoding_classes = {"application/zip": zipfile.ZipFile}
+    decoding_classes = {
+        "application/zip": zipfile.ZipFile,
+        "zip": zipfile.ZipFile,
+    }
     return decoding_classes[r.headers["Content-Type"]](BytesIO(r.content))
 
 
