@@ -117,5 +117,5 @@ specs:
   # Probably not needed
   - lz4
   - python-xxhash
-  - xrootd >=5
+  - xrootd >=5.8.0
   - ldap3
