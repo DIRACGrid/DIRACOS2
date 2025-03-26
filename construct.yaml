@@ -4,7 +4,6 @@ name: DIRACOS
 version: 2.52a1
 
 channels:
-  - diracgrid/label/xrootd-ulimit-bug
   - diracgrid
   - conda-forge
 
@@ -118,5 +117,5 @@ specs:
   # Probably not needed
   - lz4
   - python-xxhash
-  - xrootd 5.7.3 *_2
+  - xrootd >=5.8.0
   - ldap3
