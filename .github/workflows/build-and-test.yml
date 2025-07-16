@@ -23,7 +23,7 @@ jobs:
         shell: bash -l {0}
     strategy:
       matrix:
-        target_arch: ["linux-64", "linux-aarch64", "linux-ppc64le", "osx-arm64", "osx-64"]
+        target_arch: ["linux-64", "linux-aarch64", "osx-arm64", "osx-64"]
     steps:
       - uses: actions/checkout@v3
       - id: get-date
@@ -100,7 +100,7 @@ jobs:
         uses: conda-incubator/setup-miniconda@v2
         with:
           environment-file: scripts/environment.yml
-      - name: Create release notes
+      - name: Create release notes64le
         run: |
           scripts/make_release.py \
             --token="${{ secrets.GITHUB_TOKEN }}" \
