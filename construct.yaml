@@ -114,6 +114,7 @@ specs:
   - authlib >=1.0.0
   - pyjwt
   - dominate
+  - httpx
   # Probably not needed
   - lz4
   - python-xxhash
