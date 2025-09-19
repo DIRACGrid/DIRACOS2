@@ -130,6 +130,9 @@ jobs:
           - os: ubuntu-latest
             docker_image: centos:8
             installer: installer-linux-64
+          - os: ubuntu-latest
+            docker_image: almalinux:9
+            installer: installer-linux-64
           # ARM tests: run only AlmaLinux 9 tests with the linux-aarch64 installer
           - os: ubuntu-24.04-arm
             docker_image: almalinux:9
