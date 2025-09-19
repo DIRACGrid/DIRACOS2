@@ -120,3 +120,4 @@ specs:
   - python-xxhash
   - xrootd >=5.8.0
   - ldap3
+  - py-spy
