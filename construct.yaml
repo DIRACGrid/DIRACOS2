@@ -121,3 +121,6 @@ specs:
   - xrootd >=5.8.0
   - ldap3
   - py-spy
+  # Used for setting xrd attributes on local files
+  # https://github.com/DIRACGrid/DIRAC/pull/8382
+  - xattr
