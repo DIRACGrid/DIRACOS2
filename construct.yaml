@@ -124,3 +124,4 @@ specs:
   # Used for setting xrd attributes on local files
   # https://github.com/DIRACGrid/DIRAC/pull/8382
   - xattr
+  - curl <8.17
