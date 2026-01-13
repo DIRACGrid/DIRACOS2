@@ -75,13 +75,16 @@ specs:
   - cwltool
   - db12 >=1.0.4
   - diraccfg >=0.2.2
+  - fabric
   - future
   - git >=2.46
   - gitpython >=2.1.0
   - git-lfs
+  - invoke
   - matplotlib-base
   - numpy
   - openssh
+  - paramiko
   - pexpect >=4.0.1
   - pillow
   - psutil >=4.2.0
