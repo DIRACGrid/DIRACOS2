@@ -33,7 +33,7 @@ ignore_duplicate_files: true
 # happening when an old version has incorrect version pins
 specs:
   - micromamba
-  - python 3.11.*
+  - python 3.14.*
   - pip
   - openssl >=3
   # Security
