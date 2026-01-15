@@ -34,7 +34,7 @@ ignore_duplicate_files: true
 # happening when an old version has incorrect version pins
 specs:
   - micromamba
-  - python 3.11.*
+  - python 3.14.*
   - openssl >=3
   # Security
   # certifi >=2026.10.19 and ca-certificates >=2026.10.19 remove the emSign roots
