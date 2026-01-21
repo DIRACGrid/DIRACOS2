@@ -17,13 +17,21 @@ jobs:
   build-installer:
     name: Build installer
     if: github.repository == 'DIRACGrid/DIRACOS2'
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     defaults:
       run:
         shell: bash -l {0}
     strategy:
       matrix:
-        target_arch: ["linux-64", "linux-aarch64", "osx-arm64", "osx-64"]
+        include:
+          - target_arch: linux-64
+            os: ubuntu-latest
+          - target_arch: linux-aarch64
+            os: ubuntu-24.04-arm
+          - target_arch: osx-arm64
+            os: macos-14
+          - target_arch: osx-64
+            os: macos-15-intel
     steps:
       - uses: actions/checkout@v3
       - id: get-date
@@ -42,12 +50,7 @@ jobs:
           environment-file: scripts/environment.yml
       - name: Create installer
         run: |
-          if [ "${{ matrix.target_arch }}" = osx-64 ]; then
-              export CONDA_OVERRIDE_OSX=11.0
-          elif [ "${{ matrix.target_arch }}" = linux-64 ]; then
-              export CONDA_OVERRIDE_GLIBC=2.17
-          fi
-          CONDA_SUBDIR=${{ matrix.target_arch }} constructor . --platform="${{ matrix.target_arch }}"
+          constructor .
       - name: Upload installer
         uses: actions/upload-artifact@v4
         with:
