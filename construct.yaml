@@ -32,7 +32,7 @@ ignore_duplicate_files: true
 # selects an older version to avoid conflicts. This is particularly prone to
 # happening when an old version has incorrect version pins
 specs:
-  - micromamba >=0.22.0,<2
+  - micromamba
   - python 3.11.*
   - pip
   - openssl >=3
