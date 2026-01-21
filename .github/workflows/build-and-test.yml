@@ -44,7 +44,6 @@ jobs:
         run: |
           CONDA_SUBDIR=${{ matrix.target_arch }} conda create --name constructor-${{ matrix.target_arch }} micromamba
           CONDA_STANDALONE_PATH="$(conda info --envs | grep constructor-${{ matrix.target_arch }} | sed -E 's@([^ ]+ +)@@g')/bin/micromamba"
-          pip install git+http://github.com/conda/constructor.git@3.3.1
           if [ "${{ matrix.target_arch }}" = osx-64 ]; then
               export CONDA_OVERRIDE_OSX=11.0
           elif [ "${{ matrix.target_arch }}" = linux-64 ]; then
