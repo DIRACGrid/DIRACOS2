@@ -13,7 +13,8 @@ micromamba = "*"
 
 # Feature for release scripts (separate environment, excludes build deps)
 [feature.release.dependencies]
-python = ">=3.12"
+# Pin to <3.12 as dirac-docs-get-release-notes.py uses distutils
+python = ">=3.11,<3.12"
 packaging = "*"
 requests = "*"
 uritemplate = "*"
