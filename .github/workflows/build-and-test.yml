@@ -37,7 +37,7 @@ jobs:
       - name: Build installer
         run: pixi run build-installer
       - name: Upload installer
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: installer-${{ matrix.target_arch }}
           path: DIRACOS-*.sh
@@ -61,7 +61,7 @@ jobs:
           source diracos/diracosrc
           conda env export --file environment.yaml --prefix $DIRACOS
       - name: Upload environment.yaml
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: environment-yaml-${{ matrix.target_arch }}
           path: |
@@ -90,7 +90,7 @@ jobs:
             > release-notes.md
           cat release-notes.md
       - name: Upload release-notes.md
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: release-notes
           path: |
