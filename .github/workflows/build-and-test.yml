@@ -17,40 +17,25 @@ jobs:
   build-installer:
     name: Build installer
     if: github.repository == 'DIRACGrid/DIRACOS2'
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash -l {0}
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        target_arch: ["linux-64", "linux-aarch64", "osx-arm64", "osx-64"]
+        include:
+          - target_arch: linux-64
+            os: ubuntu-latest
+          - target_arch: linux-aarch64
+            os: ubuntu-24.04-arm
+          - target_arch: osx-arm64
+            os: macos-14
+          - target_arch: osx-64
+            os: macos-15-intel
     steps:
-      - uses: actions/checkout@v3
-      - id: get-date
-        run: echo "year-and-week=$(date +"%Y-W%U")" >> $GITHUB_OUTPUT
-        shell: bash
-      - name: Keep constructor cache between invocations
-        # This is big help to avoid needing to transmuting packages every time
-        id: cache-transmuted-packages
-        uses: actions/cache@v3
+      - uses: actions/checkout@v4
+      - uses: prefix-dev/setup-pixi@v0.9.3
         with:
-          path: ~/.conda/constructor
-          key: ${{ runner.os }}-${{ matrix.target_arch }}-constructor-${{ steps.get-date.outputs.year-and-week }}
-      - name: Prepare environment
-        uses: conda-incubator/setup-miniconda@v2
-        with:
-          environment-file: scripts/environment.yml
-      - name: Create installer
-        run: |
-          CONDA_SUBDIR=${{ matrix.target_arch }} conda create --name constructor-${{ matrix.target_arch }} 'micromamba>=0.22,<2'
-          CONDA_STANDALONE_PATH="$(conda info --envs | grep constructor-${{ matrix.target_arch }} | sed -E 's@([^ ]+ +)@@g')/bin/micromamba"
-          pip install git+http://github.com/conda/constructor.git@3.3.1
-          if [ "${{ matrix.target_arch }}" = osx-64 ]; then
-              export CONDA_OVERRIDE_OSX=11.0
-          elif [ "${{ matrix.target_arch }}" = linux-64 ]; then
-              export CONDA_OVERRIDE_GLIBC=2.17
-          fi
-          CONDA_SUBDIR=${{ matrix.target_arch }} constructor . --platform="${{ matrix.target_arch }}" --conda-exe="${CONDA_STANDALONE_PATH}"
+          cache: true
+      - name: Build installer
+        run: pixi run build-installer
       - name: Upload installer
         uses: actions/upload-artifact@v4
         with:
@@ -87,22 +72,19 @@ jobs:
     if: github.repository == 'DIRACGrid/DIRACOS2'
     needs: get-info
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash -l {0}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      - uses: prefix-dev/setup-pixi@v0.9.3
+        with:
+          cache: true
+          environments: release
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
           path: artifacts
-      - name: Prepare environment
-        uses: conda-incubator/setup-miniconda@v2
-        with:
-          environment-file: scripts/environment.yml
-      - name: Create release notes64le
+      - name: Create release notes
         run: |
-          scripts/make_release.py \
+          pixi run -e release release-notes \
             --token="${{ secrets.GITHUB_TOKEN }}" \
             --artifacts-dir="${PWD}/artifacts" \
             > release-notes.md
@@ -139,7 +121,7 @@ jobs:
             installer: installer-linux-aarch64
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Download installer
         uses: actions/download-artifact@v4
         with:
@@ -157,7 +139,7 @@ jobs:
       matrix:
         os: [macos-15-intel]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Download installer
         uses: actions/download-artifact@v4
         with:
@@ -179,7 +161,7 @@ jobs:
       matrix:
         os: [macos-14, macos-15]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Download installer
         uses: actions/download-artifact@v4
         with:
@@ -203,7 +185,7 @@ jobs:
           - rel-v8r0
           - integration
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: actions/setup-python@v4
         with:
           python-version: '3.9'

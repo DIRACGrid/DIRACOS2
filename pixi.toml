@@ -1,0 +1,44 @@
+[workspace]
+name = "diracos2"
+channels = ["conda-forge"]
+platforms = ["linux-64", "linux-aarch64", "osx-64", "osx-arm64"]
+
+# Core build dependencies
+[dependencies]
+python = ">=3.12"
+pip = "*"
+constructor = "*"
+libmambapy = "*"
+micromamba = "*"
+
+# Feature for release scripts (separate environment, excludes build deps)
+[feature.release.dependencies]
+# Pin to <3.12 as dirac-docs-get-release-notes.py uses distutils
+python = ">=3.11,<3.12"
+packaging = "*"
+requests = "*"
+uritemplate = "*"
+python-dateutil = "*"
+pytz = "*"
+
+[environments]
+default = { features = [], solve-group = "default" }
+release = { features = ["release"], no-default-feature = true }
+
+[target.linux-64.activation.env]
+CONDA_OVERRIDE_GLIBC = "2.17"
+
+[target.linux-aarch64.activation.env]
+CONDA_OVERRIDE_GLIBC = "2.28"
+
+[target.osx-64.activation.env]
+CONDA_OVERRIDE_OSX = "11.0"
+
+[target.osx-arm64.activation.env]
+CONDA_OVERRIDE_OSX = "13.0"
+
+[tasks]
+build-installer = { cmd = "constructor . --conda-exe=\"$(which micromamba)\"" }
+
+[feature.release.tasks]
+release-notes = { cmd = "scripts/make_release.py" }
