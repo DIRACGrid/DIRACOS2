@@ -101,7 +101,7 @@ specs:
   - suds >=1.0
   # HACK: Workaround for suds-jerko, see DIRACGrid/DIRAC#6322
   - suds-jurko-compat
-  - tornado *+dirac*
+  - tornado 5.1.1+dirac*
   - xmltodict
   - importlib_resources <6
   - importlib_metadata
