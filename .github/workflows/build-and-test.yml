@@ -45,12 +45,13 @@ jobs:
           path: ~/.conda/constructor
           key: ${{ runner.os }}-${{ matrix.target_arch }}-constructor-${{ steps.get-date.outputs.year-and-week }}
       - name: Prepare environment
-        uses: conda-incubator/setup-miniconda@v3
+        uses: mamba-org/setup-micromamba@v2
         with:
-          miniforge-version: "latest"
           environment-file: scripts/environment.yml
       - name: Create installer
         run: |
+          micromamba create --name standalone --yes micromamba
+          CONDA_STANDALONE_PATH="${MAMBA_ROOT_PREFIX}/envs/standalone/bin/micromamba"
           if [ "${{ matrix.target_arch }}" = osx-64 ]; then
               export CONDA_OVERRIDE_OSX=11.0
           elif [ "${{ matrix.target_arch }}" = linux-64 ]; then
@@ -58,7 +59,7 @@ jobs:
           elif [ "${{ matrix.target_arch }}" = linux-aarch64 ]; then
               export CONDA_OVERRIDE_GLIBC=2.28
           fi
-          constructor .
+          constructor . --conda-exe="${CONDA_STANDALONE_PATH}"
       - name: Upload installer
         uses: actions/upload-artifact@v4
         with:
@@ -105,9 +106,8 @@ jobs:
         with:
           path: artifacts
       - name: Prepare environment
-        uses: conda-incubator/setup-miniconda@v3
+        uses: mamba-org/setup-micromamba@v2
         with:
-          miniforge-version: "latest"
           environment-file: scripts/environment.yml
       - name: Create release notes64le
         run: |
