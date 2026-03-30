@@ -96,6 +96,7 @@ specs:
   - requests >=2.9.1
   - rrdtool  # [not (osx and arm64)]
   - apptainer >=1.3.6  # [not osx]
+  - signurlarity
   - six
   - subprocess32
   - suds >=1.0
