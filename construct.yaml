@@ -51,7 +51,7 @@ specs:
   # They can't actually be removed yet as DIRAC stil has it in the dependencies
   - elasticsearch <7.14
   - elasticsearch-dsl
-  - numpy <2  # elasticsearch<7.14 needs numpy 1.x, remove this constraint when elasticsearch is removed
+  - numpy <2 # elasticsearch<7.14 needs numpy 1.x, remove this constraint when elasticsearch is removed
   # Earlier versions of mysqlclient were build with older MySQL versions
   - mysqlclient >=2.0.3,<2.1
   - sqlalchemy >=1.4.36
@@ -63,7 +63,7 @@ specs:
   - gfal2 >=2.20.5
   - gfal2-util >=1.7.1
   - fts3 >=3.12
-  - nordugrid-arc >=6.21  # [not osx]
+  - nordugrid-arc >=6.21 # [not osx]
   - python-gfal2 >=1.13.0
   - htcondor-utils >=24.2 # [linux]
   - python-htcondor >=24.2 # [linux]
@@ -94,8 +94,10 @@ specs:
   - python-json-logger >=0.1.8
   - pytz >=2015.7
   - requests >=2.9.1
-  - rrdtool  # [not (osx and arm64)]
-  - apptainer >=1.3.6  # [not osx]
+  - rrdtool # [not (osx and arm64)]
+  - apptainer >=1.3.6 # [not osx]
+  # pin setuptools for installing all v8 releases not patched with https://github.com/DIRACGrid/DIRAC/pull/8492/changes
+  - setuptools <82.0
   - signurlarity
   - six
   - subprocess32
@@ -112,7 +114,7 @@ specs:
   - hypothesis
   - ipython
   - mock
-  - prmon  # [linux]
+  - prmon # [linux]
   - pytest
   - recommonmark
   - authlib >=1.0.0
