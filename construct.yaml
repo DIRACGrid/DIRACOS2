@@ -41,7 +41,7 @@ specs:
   - m2crypto >=0.43
   - pyasn1 >0.4.1
   - pyasn1-modules
-  - tornado_m2crypto
+  - tornado_m2crypto >=0.1.4
   # Databases
   - cmreshandler >1.0.0b4
   - opensearch-py
