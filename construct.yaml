@@ -66,8 +66,8 @@ specs:
   - fts3 >=3.12
   - nordugrid-arc >=6.21 # [not osx]
   - python-gfal2 >=1.13.0
-  - htcondor-utils >=24.2 # [linux]
-  - python-htcondor >=24.2 # [linux]
+  - htcondor-utils ~=25.0.* # [linux]
+  - python-htcondor ~=25.0.* # [linux]
   - rucio-clients >=36.0.0
   - voms >=2.1.0rc3
   # Others
