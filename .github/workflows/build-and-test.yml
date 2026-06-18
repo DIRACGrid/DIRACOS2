@@ -183,6 +183,7 @@ jobs:
       matrix:
         dirac-branch:
           - rel-v8r0
+          - rel-v9r0
           - integration
     steps:
       - uses: actions/checkout@v6
