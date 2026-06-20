@@ -30,7 +30,7 @@ jobs:
           - target_arch: osx-64
             os: macos-15-intel
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: prefix-dev/setup-pixi@v0.9.6
         with:
           cache: true
@@ -73,7 +73,7 @@ jobs:
     needs: get-info
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: prefix-dev/setup-pixi@v0.9.6
         with:
           cache: true
@@ -121,7 +121,7 @@ jobs:
             installer: installer-linux-aarch64
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Download installer
         uses: actions/download-artifact@v8
         with:
@@ -139,7 +139,7 @@ jobs:
       matrix:
         os: [macos-15-intel]
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Download installer
         uses: actions/download-artifact@v8
         with:
@@ -161,7 +161,7 @@ jobs:
       matrix:
         os: [macos-14, macos-15]
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Download installer
         uses: actions/download-artifact@v8
         with:
@@ -186,7 +186,7 @@ jobs:
           - rel-v9r0
           - integration
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: actions/setup-python@v6
         with:
           python-version: '3.14'
