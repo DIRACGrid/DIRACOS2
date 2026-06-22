@@ -105,15 +105,15 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # x86_64 tests: run against CentOS 7 and 8 with the linux-64 installer
+          # x86_64 tests: run against varous EL versions with the linux-64 installer
           - os: ubuntu-latest
-            docker_image: centos:7
-            installer: installer-linux-64
-          - os: ubuntu-latest
-            docker_image: centos:8
+            docker_image: almalinux:8
             installer: installer-linux-64
           - os: ubuntu-latest
             docker_image: almalinux:9
+            installer: installer-linux-64
+          - os: ubuntu-latest
+            docker_image: almalinux:10
             installer: installer-linux-64
           # ARM tests: run only AlmaLinux 9 tests with the linux-aarch64 installer
           - os: ubuntu-24.04-arm
