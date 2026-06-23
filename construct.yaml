@@ -119,6 +119,7 @@ specs:
   - pytest
   - recommonmark
   - authlib >=1.0.0
+  - joserfc
   - pyjwt
   - dominate
   - httpx
