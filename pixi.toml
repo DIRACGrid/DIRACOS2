@@ -2,6 +2,9 @@
 name = "diracos2"
 channels = ["conda-forge"]
 platforms = ["linux-64", "linux-aarch64", "osx-64", "osx-arm64"]
+# Ignore packages published in the last 7 days to reduce the risk of pulling in
+# recently released (and potentially compromised or broken) versions.
+exclude-newer = "7d"
 
 # Core build dependencies
 [dependencies]
