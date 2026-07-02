@@ -14,6 +14,11 @@ libmambapy = "*"
 micromamba = "*"
 constructor = ">=3.16.0"
 
+# Exempt constructor from the 7-day cooldown: it is our own build tool and the
+# only released version on conda-forge is newer than the cutoff.
+[exclude-newer]
+constructor = "0d"
+
 # Feature for release scripts (separate environment, excludes build deps)
 [feature.release.dependencies]
 # Pin to <3.12 as dirac-docs-get-release-notes.py uses distutils
