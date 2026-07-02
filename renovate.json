@@ -5,6 +5,8 @@
     ":dependencyDashboard",
     "group:allNonMajor"
   ],
+  "minimumReleaseAge": "7 days",
+  "internalChecksFilter": "strict",
   "packageRules": [
     {
       "matchManagers": ["pixi"],

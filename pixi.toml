@@ -2,6 +2,9 @@
 name = "diracos2"
 channels = ["conda-forge"]
 platforms = ["linux-64", "linux-aarch64", "osx-64", "osx-arm64"]
+# Ignore packages published in the last 7 days to reduce the risk of pulling in
+# recently released (and potentially compromised or broken) versions.
+exclude-newer = "7d"
 
 # Core build dependencies
 [dependencies]
@@ -9,15 +12,12 @@ python = ">=3.12"
 pip = "*"
 libmambapy = "*"
 micromamba = "*"
-conda = ">=4.6"
-conda-standalone = "*"
-jinja2 = "*"
-jsonschema = ">=4"
-pillow = ">=3.1"
-"ruamel.yaml" = "*"
+constructor = ">=3.16.0"
 
-[pypi-dependencies]
-constructor = { git = "https://github.com/chrisburr/constructor.git", branch = "fix/mkdir-conda-guard" }
+# Exempt constructor from the 7-day cooldown: it is our own build tool and the
+# only released version on conda-forge is newer than the cutoff.
+[exclude-newer]
+constructor = "0d"
 
 # Feature for release scripts (separate environment, excludes build deps)
 [feature.release.dependencies]
