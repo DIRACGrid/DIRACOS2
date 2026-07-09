@@ -96,7 +96,7 @@ specs:
   - python-json-logger >=0.1.8
   - pytz >=2015.7
   - requests >=2.9.1
-  - rrdtool # [not (osx and arm64)]
+  - rrdtool
   - apptainer >=1.3.6 # [not osx]
   # pin setuptools for installing all v8 releases not patched with https://github.com/DIRACGrid/DIRAC/pull/8492/changes
   - setuptools <82.0
