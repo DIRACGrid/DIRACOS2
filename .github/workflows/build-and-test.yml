@@ -188,6 +188,15 @@ jobs:
           - integration
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Free up disk space
+        # The integration tests install DIRACOS twice (server + client) on the
+        # same runner. The Python 3.14 environment is large enough that the
+        # second install can exhaust the default runner disk, so remove some of
+        # the bulky pre-installed toolchains we don't need.
+        run: |
+          df -h /
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc /usr/local/share/boost
+          df -h /
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: '3.14'
