@@ -3,7 +3,8 @@
   "extends": [
     "config:recommended",
     ":dependencyDashboard",
-    "group:allNonMajor"
+    "group:allNonMajor",
+    "helpers:pinGitHubActionDigests"
   ],
   "minimumReleaseAge": "7 days",
   "internalChecksFilter": "strict",
@@ -11,6 +12,10 @@
     {
       "matchManagers": ["pixi"],
       "groupName": "pixi dependencies"
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "groupName": "github-actions"
     }
   ]
 }
