@@ -53,8 +53,7 @@ specs:
   - elasticsearch <7.14
   - elasticsearch-dsl
   - numpy <2 # elasticsearch<7.14 needs numpy 1.x, remove this constraint when elasticsearch is removed
-  # Earlier versions of mysqlclient were build with older MySQL versions
-  - mysqlclient >=2.0.3,<2.1
+  - mysqlclient >=2.2.0
   - sqlalchemy >=1.4.36
   - stomp.py >8
   # Middleware
