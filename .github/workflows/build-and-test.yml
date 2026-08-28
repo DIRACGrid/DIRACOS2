@@ -31,7 +31,7 @@ jobs:
             os: macos-15-intel
     steps:
       - uses: actions/checkout@v7
-      - uses: prefix-dev/setup-pixi@v0.10.0
+      - uses: prefix-dev/setup-pixi@v0.10.1
         with:
           cache: true
       - name: Build installer
@@ -74,7 +74,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: prefix-dev/setup-pixi@v0.10.0
+      - uses: prefix-dev/setup-pixi@v0.10.1
         with:
           cache: true
           environments: release
@@ -197,7 +197,10 @@ jobs:
       - name: Prepare environment
         run: |
           pip install typer pyyaml gitpython packaging
-          git clone https://github.com/DIRACGrid/DIRAC.git -b "${{ matrix.dirac-branch }}" DIRACRepo
+          # HACK: DO NOT MERGE - clone the plot-test fix branches instead of the real ones
+          git clone https://github.com/chrisburr/DIRAC.git -b "fix/plot-tests-numpy-bins-${DIRAC_BRANCH#rel-}" DIRACRepo
+        env:
+          DIRAC_BRANCH: ${{ matrix.dirac-branch }}
       - name: Run tests
         run: |
           DIRACOS_TARBALL_PATH=$(echo ${PWD}/DIRACOS-*.sh)
