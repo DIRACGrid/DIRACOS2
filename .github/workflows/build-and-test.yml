@@ -197,10 +197,7 @@ jobs:
       - name: Prepare environment
         run: |
           pip install typer pyyaml gitpython packaging
-          # HACK: DO NOT MERGE - clone the plot-test fix branches instead of the real ones
-          git clone https://github.com/chrisburr/DIRAC.git -b "fix/plot-tests-numpy-bins-${DIRAC_BRANCH#rel-}" DIRACRepo
-        env:
-          DIRAC_BRANCH: ${{ matrix.dirac-branch }}
+          git clone https://github.com/DIRACGrid/DIRAC.git -b "${{ matrix.dirac-branch }}" DIRACRepo
       - name: Run tests
         run: |
           DIRACOS_TARBALL_PATH=$(echo ${PWD}/DIRACOS-*.sh)
