@@ -18,6 +18,12 @@ constructor = ">=3.16.0"
 # only released version on conda-forge is newer than the cutoff.
 [exclude-newer]
 constructor = "0d"
+# Exempt the certificate trust stores and pip from the cooldown: security
+# releases removing the compromised eMudhra/emSign CA keys (CVE-2026-111943)
+# must not be blocked by the 7-day window.
+ca-certificates = "0d"
+certifi = "0d"
+pip = "0d"
 
 # Feature for release scripts (separate environment, excludes build deps)
 [feature.release.dependencies]
