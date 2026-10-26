@@ -22,7 +22,7 @@ constructor = "0d"
 # Feature for release scripts (separate environment, excludes build deps)
 [feature.release.dependencies]
 # Pin to <3.12 as dirac-docs-get-release-notes.py uses distutils
-python = ">=3.11,<3.12"
+python = ">=3.15,<3.16"
 packaging = "*"
 requests = "*"
 uritemplate = "*"
