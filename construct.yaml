@@ -35,10 +35,14 @@ ignore_duplicate_files: true
 specs:
   - micromamba
   - python 3.11.*
-  - pip
   - openssl >=3
   # Security
-  - certifi
+  # certifi >=2026.10.19 and ca-certificates >=2026.10.19 remove the emSign roots
+  # affected by the eMudhra CA key compromise (CVE-2026-111943, October 2026).
+  # pip >=26.2.2 is required as it vendors its own certifi bundle.
+  - certifi >=2026.10.19
+  - ca-certificates >=2026.10.19
+  - pip >=26.2.2
   - m2crypto >=0.50
   - pyasn1 >0.4.1
   - pyasn1-modules
