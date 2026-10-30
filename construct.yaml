@@ -129,7 +129,7 @@ specs:
   # Probably not needed
   - lz4
   - python-xxhash
-  - xrootd >=5.8.0
+  - xrootd >=6.2.1
   - ldap3
   - py-spy
   # Used for setting xrd attributes on local files
