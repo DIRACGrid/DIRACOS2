@@ -26,7 +26,7 @@ jobs:
           - target_arch: linux-aarch64
             os: ubuntu-24.04-arm
           - target_arch: osx-arm64
-            os: macos-14
+            os: macos-15
           - target_arch: osx-64
             os: macos-15-intel
     steps:
@@ -159,7 +159,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-14, macos-15]
+        os: [macos-15, macos-26]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Download installer
