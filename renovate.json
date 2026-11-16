@@ -1,21 +1,17 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended",
+    "local>DIRACGrid/.github//renovate-config",
     ":dependencyDashboard",
-    "group:allNonMajor",
-    "helpers:pinGitHubActionDigests"
+    "group:allNonMajor"
   ],
-  "minimumReleaseAge": "7 days",
   "internalChecksFilter": "strict",
   "packageRules": [
     {
-      "matchManagers": ["pixi"],
+      "matchManagers": [
+        "pixi"
+      ],
       "groupName": "pixi dependencies"
-    },
-    {
-      "matchManagers": ["github-actions"],
-      "groupName": "github-actions"
     }
   ]
 }
