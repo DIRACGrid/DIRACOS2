@@ -2,10 +2,8 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "local>DIRACGrid/.github//renovate-config",
-    ":dependencyDashboard",
     "group:allNonMajor"
   ],
-  "internalChecksFilter": "strict",
   "packageRules": [
     {
       "matchManagers": [
