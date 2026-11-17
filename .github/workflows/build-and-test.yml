@@ -66,43 +66,10 @@ jobs:
         with:
           name: installer-${{ matrix.target_arch }}
       - name: Generate environment.yaml
-        # The installer only ships micromamba (no conda), so the environment
-        # is exported via "micromamba list" in conda env export format, which
-        # is what scripts/make_release.py parses for the release notes.
         run: |
           bash DIRACOS-*.sh
           source diracos/diracosrc
-          "$DIRACOS/bin/python" - <<'EOF'
-          import json
-          import os
-          import subprocess
-
-          prefix = os.environ["DIRACOS"]
-          packages = json.loads(
-              subprocess.check_output(
-                  [f"{prefix}/bin/micromamba", "list", "--prefix", prefix, "--json"],
-                  text=True,
-              )
-          )["packages"]
-
-          channels = []
-          for package in packages:
-              if package["channel"] not in channels:
-                  channels.append(package["channel"])
-
-          with open("environment.yaml", "w") as env_file:
-              env_file.write(f"name: {prefix}\n")
-              env_file.write("channels:\n")
-              for channel in channels:
-                  env_file.write(f"  - {channel}\n")
-              env_file.write("dependencies:\n")
-              for package in packages:
-                  env_file.write(
-                      f"  - {package['name']}={package['version']}"
-                      f"={package['build_string']}\n"
-                  )
-              env_file.write(f"prefix: {prefix}\n")
-          EOF
+          micromamba env export --prefix "$DIRACOS" > environment.yaml
       - name: Upload environment.yaml
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:

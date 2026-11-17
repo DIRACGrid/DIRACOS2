@@ -2,6 +2,7 @@
 """
 Some imports to make sure that the DIRACOS environment is complete
 """
+
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function

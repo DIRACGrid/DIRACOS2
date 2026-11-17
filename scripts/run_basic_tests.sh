@@ -11,7 +11,7 @@ exec docker run --rm --privileged -v "${PWD}":/diracos-repo "${IMAGE_NAME}" bash
   if ! command -v sudo >/dev/null 2>&1; then
     yum install -y sudo
   fi
-  
+
   # Install as a non-root user with a read-only $HOME so that DIRACGrid/DIRACOS2#174
   # (installer failing on mkdir ~/.conda when $HOME is not writable) would be
   # reproduced here. Root ignores permission bits, so this check only works as
