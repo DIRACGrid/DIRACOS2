@@ -13,10 +13,11 @@ on:
     - cron:  '6 2 * * *'
   workflow_dispatch:
 
-# A new push to the same branch/PR cancels the previous run.
+# A new push to the same PR cancels the previous run. Runs on main (pushes
+# and the nightly schedule) are never cancelled: releases use their artifacts.
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 permissions:
   contents: read

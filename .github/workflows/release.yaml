@@ -12,7 +12,8 @@ on:
         required: false
         default: ''
 
-# Don't cancel: a queued run may be a release waiting to publish.
+# Never cancel a running release. GitHub keeps only one pending run per group,
+# so a newer dispatch replaces a queued (not yet started) one.
 concurrency:
   group: ${{ github.workflow }}
   cancel-in-progress: false
@@ -25,8 +26,9 @@ jobs:
     name: create-release
     if: github.repository == 'DIRACGrid/DIRACOS2'
     runs-on: ubuntu-latest
+    # The release is created with secrets.GH_TOKEN, not the GITHUB_TOKEN.
     permissions:
-      contents: write  # create the GitHub release
+      contents: read
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
