@@ -1,8 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "local>DIRACGrid/.github//renovate-config",
-    "group:allNonMajor"
+    "group:allNonMajor",
+    "local>DIRACGrid/.github//renovate-config"
   ],
   "packageRules": [
     {
