@@ -12,20 +12,40 @@ on:
         required: false
         default: ''
 
+# Never cancel a running release. GitHub keeps only one pending run per group,
+# so a newer dispatch replaces a queued (not yet started) one.
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
 jobs:
   create-release:
+    name: create-release
     if: github.repository == 'DIRACGrid/DIRACOS2'
     runs-on: ubuntu-latest
+    # The release is created with secrets.GH_TOKEN, not the GITHUB_TOKEN.
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - uses: prefix-dev/setup-pixi@ad1da6449d9e506fd127fd67ab2d054a769f6a94 # v0.11.2
         with:
           cache: true
           environments: release
       - name: Create release
+        env:
+          # zizmor: ignore[secrets-outside-env] release creation; no GitHub environment needed
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          RUN_ID: ${{ github.event.inputs.run_id }}
+          VERSION_INPUT: ${{ github.event.inputs.version }}
         run: |
           pixi run -e release release-notes \
-            --token="${{ secrets.GH_TOKEN }}" \
-            --run-id="${{ github.event.inputs.run_id }}" \
-            --version="${{ github.event.inputs.version }}" \
+            --token="${GH_TOKEN}" \
+            --run-id="${RUN_ID}" \
+            --version="${VERSION_INPUT}" \
             --make-release
