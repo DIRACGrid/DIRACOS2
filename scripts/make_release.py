@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 import argparse
-import base64
 import difflib
 from pathlib import Path
 from io import BytesIO
@@ -8,7 +7,6 @@ import logging
 import re
 import subprocess
 import tempfile
-import time
 import zipfile
 
 from packaging.version import Version, InvalidVersion
@@ -46,8 +44,9 @@ def main(
        causing the "latest" release to update
     6. Editing the current "main" branch to be one version higher than the current latest release
 
-    Authentication is performed using the GitHub API token which is automatically made available
-    to all GitHub Actions jobs.
+    The GitHub API is used with the token which is automatically made available to all GitHub
+    Actions jobs. The tag and the commit on "main" are pushed with git over SSH, using the deploy
+    key the workflow puts in ``GIT_SSH_COMMAND``: only deploy keys may pass the repository rulesets.
 
     :param str run_id: The GitHub Actions run ID or, if missing, defaults to the most recent
     :param str artifacts_dir: Directory containing artefacts
@@ -378,6 +377,13 @@ def make_release_notes(version, installers):
     )
 
 
+def git(*args):
+    """Run git in the current clone and return its output"""
+    return subprocess.run(
+        ["git", *args], check=True, text=True, stdout=subprocess.PIPE
+    ).stdout
+
+
 def make_release(installers, version, release_notes):
     """Create a new GitHub release using the given data
 
@@ -390,13 +396,18 @@ def make_release(installers, version, release_notes):
     :param str version: The version of the new release
     :param str release_notes: Release notes to include in the release description
     """
+    # The API token is not allowed to create tags, so push it first
+    commit_hash = installers["linux-64"]["commit_hash"]
+    git("fetch", "origin", commit_hash)
+    git("push", ssh_remote, f"{commit_hash}:refs/tags/{version}")
+
     # Create a draft release
     r = requests.post(
         f"{api_root}/releases",
         json={
             "name": f"DIRACOS {version}",
             "tag_name": version,
-            "target_commitish": installers["linux-64"]["commit_hash"],
+            "target_commitish": commit_hash,
             "body": release_notes,
             "draft": True,
             "prerelease": Version(version).is_prerelease,
@@ -479,10 +490,8 @@ def bump_version_in_main(new_version):
 
     :param str new_version: The next version number of DIRACOS2
     """
-    r = requests.get(f"{api_root}/contents/construct.yaml", headers=headers)
-    r.raise_for_status()
-    file_info = r.json()
-    data = base64.b64decode(file_info["content"]).decode()
+    git("fetch", "origin", "main")
+    data = git("show", "FETCH_HEAD:construct.yaml")
 
     if match := CONSTRUCT_VERSION_PATTERN.search(data):
         if Version(new_version) <= Version(match.groups()[0]):
@@ -499,25 +508,20 @@ def bump_version_in_main(new_version):
     if num_subs != 1:
         raise RuntimeError(num_subs)
 
-    data = {
-        "message": f"Bump version to {new_version}",
-        "content": base64.b64encode(new_data.encode()).decode(),
-        "sha": file_info["sha"],
-        "branch": "main",
-    }
-    logging.info(f"Bumping version of {file_info['url']} with: {data}")
-    # At some point the following PUT started failing with 409 Conflict
-    # Let's try adding a sleep to see if that avoids the issue
-    time.sleep(30)
-    r = requests.put(
-        file_info["url"],
-        json=data,
-        headers=headers,
+    git("checkout", "--detach", "FETCH_HEAD")
+    Path("construct.yaml").write_text(new_data)
+    git(
+        "-c",
+        "user.name=DIRACGrid CI",
+        "-c",
+        "user.email=ci@diracgrid.org",
+        "commit",
+        "-m",
+        f"Bump version to {new_version}",
+        "construct.yaml",
     )
-    r.raise_for_status()
-    logging.info(
-        f"Pushed commit to bump version to {new_version} as {r.json()['commit']['html_url']}"
-    )
+    git("push", ssh_remote, "HEAD:refs/heads/main")
+    logging.info(f"Pushed commit to bump version to {new_version}")
 
 
 # Crude unit tests for get_version
@@ -545,6 +549,7 @@ if __name__ == "__main__":
         "Authorization": f"token {token}",
     }
     api_root = f"https://api.github.com/repos/{args.owner}/{args.repo}"
+    ssh_remote = f"git@github.com:{args.owner}/{args.repo}.git"
 
     if args.version and args.version.startswith("v"):
         raise ValueError('For consistency versions must not start with "v"')

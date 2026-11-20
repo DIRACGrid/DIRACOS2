@@ -26,9 +26,11 @@ jobs:
     name: create-release
     if: github.repository == 'DIRACGrid/DIRACOS2'
     runs-on: ubuntu-latest
-    # The release is created with secrets.GH_TOKEN, not the GITHUB_TOKEN.
+    # Holds the deploy key, the only actor allowed past the branch and tag rulesets.
+    environment: release
     permissions:
-      contents: read
+      actions: read  # download the installers built by the CI run
+      contents: write  # create the GitHub release on the tag pushed with the deploy key
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -39,11 +41,16 @@ jobs:
           environments: release
       - name: Create release
         env:
-          # zizmor: ignore[secrets-outside-env] release creation; no GitHub environment needed
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_DEPLOY_KEY: ${{ secrets.RELEASE_DEPLOY_KEY }}
           RUN_ID: ${{ github.event.inputs.run_id }}
           VERSION_INPUT: ${{ github.event.inputs.version }}
         run: |
+          install -m 600 /dev/null "${RUNNER_TEMP}/release_key"
+          printf '%s\n' "${RELEASE_DEPLOY_KEY}" > "${RUNNER_TEMP}/release_key"
+          # GitHub's SSH host key, from https://api.github.com/meta
+          echo "github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl" > "${RUNNER_TEMP}/known_hosts"
+          export GIT_SSH_COMMAND="ssh -i ${RUNNER_TEMP}/release_key -o IdentitiesOnly=yes -o UserKnownHostsFile=${RUNNER_TEMP}/known_hosts"
           pixi run -e release release-notes \
             --token="${GH_TOKEN}" \
             --run-id="${RUN_ID}" \
