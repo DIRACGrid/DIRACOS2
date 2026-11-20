@@ -66,7 +66,7 @@ specs:
   - boto3 <1.36
   - gfal2 >=2.20.5
   - gfal2-util >=1.7.1
-  - fts3 >=3.12
+  - fts3 >=3.13
   - nordugrid-arc >=6.21 # [not osx]
   - python-gfal2 >=1.13.0
   - htcondor-utils ~=25.0.0 # [linux]
