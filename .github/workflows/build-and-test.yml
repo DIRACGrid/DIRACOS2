@@ -232,3 +232,17 @@ jobs:
           cd DIRACRepo
           ./integration_tests.py create \
             "DIRACOS_TARBALL_PATH=${DIRACOS_TARBALL_PATH}"
+
+  # The one check the branch ruleset requires: its name does not change with the matrices above.
+  ci-ok:
+    name: ci-ok
+    if: always()
+    needs: [build-installer, get-info, release-notes, basic-tests, macos-64-tests, macos-tests, integration-tests-client-and-server]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fail unless every job passed or was skipped
+        env:
+          RESULTS: ${{ join(needs.*.result, ' ') }}
+        run: |
+          echo "${RESULTS}"
+          [[ ! "${RESULTS}" =~ failure|cancelled ]]
