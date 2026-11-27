@@ -2,9 +2,16 @@
 name = "diracos2"
 channels = ["conda-forge"]
 platforms = ["linux-64", "linux-aarch64", "osx-64", "osx-arm64"]
-# Ignore packages published in the last 7 days to reduce the risk of pulling in
-# recently released (and potentially compromised or broken) versions.
-exclude-newer = "7d"
+# Require a pixi new enough for the exclude-newer exemptions below (added in 0.84.0).
+requires-pixi = ">=0.84.0"
+
+# Supply-chain cooldown: ignore packages published in the last 7 days to reduce
+# the risk of pulling in recently released (and potentially compromised or
+# broken) versions. Exempt constructor: it is our own build tool and the only
+# released version on conda-forge is newer than the cutoff.
+[workspace.exclude-newer]
+cutoff = "7d"
+exemptions = { constructor = "*" }
 
 # Core build dependencies
 [dependencies]
@@ -13,11 +20,6 @@ pip = "*"
 libmambapy = "*"
 micromamba = "*"
 constructor = ">=3.16.0"
-
-# Exempt constructor from the 7-day cooldown: it is our own build tool and the
-# only released version on conda-forge is newer than the cutoff.
-[exclude-newer]
-constructor = "0d"
 
 # Feature for release scripts (separate environment, excludes build deps)
 [feature.release.dependencies]
